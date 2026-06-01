@@ -1,0 +1,3688 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>Капитализация процентов как налоговый триггер · Разбор кейса А63-18337/2025</title>
+<meta name="description" content="Интерактивный разбор налогового спора: капитализация процентов по контролируемой задолженности перед иностранным займодавцем и налог у источника по ставке 15%. Дело № А63-18337/2025." />
+<meta name="theme-color" content="#0026BA" />
+
+<!-- Google Fonts: Montserrat (фирменный шрифт SCHNEIDER GROUP) + JetBrains Mono.
+     Подключение через CDN — единственная внешняя зависимость.
+     Fallback: Arial / системные при отсутствии сети. -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<style>
+/* ============================================================
+   DESIGN SYSTEM — SCHNEIDER GROUP brand
+   Палитра: deep blue / light blue / greenish-blue / violet
+   Шрифты: Montserrat (Light 300 / Bold 700 / ExtraBold 800)
+   ============================================================ */
+:root{
+  /* === Фирменные цвета SCHNEIDER GROUP === */
+  --sg-blue:        #0026BA;          /* Pantone 2736C — основной */
+  --sg-blue-deep:   #001A85;          /* затемнённый для hover/depth */
+  --sg-blue-soft:   #e6e9f8;          /* фон карточек */
+  --sg-blue-pale:   #f3f5fc;          /* мягкий фон секций */
+  --sg-light-blue:  #315DF6;          /* Pantone 285C */
+  --sg-teal:        #41D2CD;          /* Pantone 3252C — greenish-blue */
+  --sg-teal-soft:   #d6f3f1;
+  --sg-violet:      #8745DE;          /* Pantone 266C — акцент риска */
+  --sg-violet-soft: #ede1fa;
+
+  /* === Поверхности === */
+  --bg:             #ffffff;
+  --surface:        #f7f8fc;          /* фон секций */
+  --surface-card:   #ffffff;          /* фон карточек поверх surface */
+  --surface-cool:   var(--sg-blue-pale);
+
+  /* === Текст === */
+  --ink:            #0a1230;          /* почти-чёрный с глубоко-синим подтоном */
+  --ink-soft:       #3a4364;
+  --ink-mute:       #6b7395;
+  --ink-faint:      #9aa1bd;
+
+  /* === Линии и обводки === */
+  --rule:           #e3e7f3;
+  --rule-soft:      #eef0f8;
+  --rule-strong:    #c7cee6;
+
+  /* === Семантические алиасы (преемственность со старой системой) === */
+  --paper:          var(--bg);
+  --paper-deep:     var(--surface);
+  --paper-card:     var(--surface-card);
+  --copper:         var(--sg-violet);          /* «риск» → фиолетовый */
+  --copper-deep:    #6a2db0;
+  --copper-soft:    var(--sg-violet-soft);
+  --petrol:         var(--sg-teal);            /* «вывод/практика» → бирюзовый */
+  --petrol-deep:    #2bb0ab;
+  --petrol-soft:    var(--sg-teal-soft);
+  --gold:           var(--sg-light-blue);      /* «данные/числа» → светло-синий */
+  --gold-soft:      var(--sg-blue-soft);
+
+  /* === Шкала риска (в брендовой палитре) === */
+  --risk-low:       var(--sg-teal);
+  --risk-medium:    var(--sg-light-blue);
+  --risk-high:      var(--sg-violet);
+  --risk-critical:  var(--sg-blue);
+
+  /* === Типографика === */
+  --font-display: "Montserrat", "Arial", "Helvetica Neue", system-ui, sans-serif;
+  --font-body:    "Montserrat", "Arial", "Helvetica Neue", system-ui, sans-serif;
+  --font-mono:    "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  /* === Spacing scale (8px base) === */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 24px;
+  --s-6: 32px;
+  --s-7: 48px;
+  --s-8: 64px;
+  --s-9: 96px;
+  --s-10: 128px;
+
+  /* === Закругления (Agriga-style — мягкие, крупные) === */
+  --radius-sm: 8px;
+  --radius:    16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --radius-pill: 999px;
+
+  --shadow-1: 0 1px 2px rgba(10,18,48,.04), 0 2px 8px rgba(10,18,48,.04);
+  --shadow-2: 0 4px 12px rgba(10,18,48,.06), 0 12px 32px -12px rgba(10,18,48,.14);
+  --shadow-3: 0 8px 20px rgba(10,18,48,.08), 0 32px 64px -24px rgba(0,38,186,.20);
+  --shadow-blue: 0 8px 24px -8px rgba(0,38,186,.35);
+
+  --maxw: 1240px;
+
+  --t-fast: 160ms cubic-bezier(.2,.7,.2,1);
+  --t-mid:  280ms cubic-bezier(.2,.7,.2,1);
+  --t-slow: 520ms cubic-bezier(.2,.7,.2,1);
+}
+
+/* ============================================================
+   RESET / BASE
+   ============================================================ */
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  font-family:var(--font-body);
+  font-size:16px;
+  font-weight:300;                  /* Montserrat Light по умолчанию */
+  line-height:1.6;
+  color:var(--ink);
+  background:var(--bg);
+  background-image:
+    radial-gradient(1100px 600px at 92% -8%, rgba(0,38,186,.05), transparent 65%),
+    radial-gradient(900px 500px at -8% 28%, rgba(65,210,205,.05), transparent 65%);
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+h1,h2,h3,h4,h5{font-family:var(--font-display);line-height:1.15;letter-spacing:-.015em;margin:0;color:var(--ink)}
+h1{font-size:clamp(36px,5.4vw,68px);font-weight:800;letter-spacing:-.03em;line-height:1.05}
+h2{font-size:clamp(24px,2.6vw,34px);font-weight:800;letter-spacing:-.02em}
+h3{font-size:clamp(18px,1.8vw,22px);font-weight:700;letter-spacing:-.01em}
+h4{font-size:clamp(15px,1.3vw,17px);font-weight:700;letter-spacing:0}
+h5{font-size:13px;font-weight:700;letter-spacing:.02em}
+p{margin:0 0 var(--s-4);font-weight:300}
+strong,b{font-weight:700;color:var(--ink)}
+a{color:var(--sg-blue);text-decoration-color:rgba(0,38,186,.25);text-underline-offset:3px;transition:text-decoration-color var(--t-fast),color var(--t-fast)}
+a:hover{text-decoration-color:var(--sg-blue);color:var(--sg-blue-deep)}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;padding:0}
+:focus-visible{outline:2px solid var(--sg-blue);outline-offset:3px;border-radius:6px}
+img,svg{display:block;max-width:100%}
+hr{border:0;height:1px;background:var(--rule);margin:var(--s-7) 0}
+
+.container{max-width:var(--maxw);margin-inline:auto;padding-inline:clamp(20px,4vw,40px)}
+
+/* ============================================================
+   NAVIGATION — основной топбар
+   ============================================================ */
+.topbar{
+  position:sticky;top:0;z-index:50;
+  background:rgba(255,255,255,.88);
+  backdrop-filter:saturate(140%) blur(12px);
+  -webkit-backdrop-filter:saturate(140%) blur(12px);
+  border-bottom:1px solid var(--rule);
+}
+.topbar-inner{
+  display:flex;align-items:center;gap:var(--s-5);
+  height:64px;
+}
+.brand{
+  display:flex;align-items:center;gap:var(--s-3);
+  font-family:var(--font-display);font-size:16px;font-weight:700;letter-spacing:-.01em;
+  color:var(--ink);text-decoration:none;
+}
+.brand:hover{color:var(--sg-blue)}
+.brand-mark{
+  width:38px;height:38px;border-radius:var(--radius-sm);
+  background:var(--sg-blue);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;flex-shrink:0;
+  box-shadow:var(--shadow-blue);
+}
+/* стилизованный логотип в духе SCHNEIDER GROUP — три горизонтальные полоски */
+.brand-mark::before,
+.brand-mark::after{
+  content:"";position:absolute;left:9px;right:9px;height:2px;border-radius:2px;background:#fff;
+}
+.brand-mark::before{top:13px;width:20px}
+.brand-mark::after{top:19px;width:14px;left:auto;right:9px}
+.brand-mark span{
+  position:absolute;left:9px;width:18px;height:2px;border-radius:2px;background:#fff;top:25px;
+}
+.brand small{
+  font-family:var(--font-body);font-size:10px;font-weight:600;
+  text-transform:uppercase;letter-spacing:.18em;color:var(--ink-mute);
+  display:block;line-height:1;margin-bottom:3px;
+}
+.brand b{display:block;line-height:1.2;font-weight:800;letter-spacing:-.005em}
+
+.nav{margin-left:auto;display:flex;gap:4px;align-items:center}
+.nav a{
+  font-size:12px;letter-spacing:.04em;text-transform:uppercase;font-weight:600;
+  text-decoration:none;color:var(--ink-soft);
+  padding:8px 12px;border-radius:var(--radius-pill);
+  transition:color var(--t-fast),background var(--t-fast);
+}
+.nav a:hover{color:var(--sg-blue);background:var(--sg-blue-soft)}
+.nav a[data-active="true"]{color:var(--sg-blue);background:var(--sg-blue-soft)}
+@media (max-width:1000px){.nav{display:none}}
+
+.progress{
+  position:fixed;top:64px;left:0;right:0;height:3px;z-index:49;
+  background:transparent;pointer-events:none;
+}
+.progress-bar{
+  height:100%;width:0;
+  background:linear-gradient(90deg,var(--sg-blue),var(--sg-light-blue) 60%,var(--sg-teal));
+  transition:width 80ms linear;
+}
+
+/* ============================================================
+   SECTION BREADCRUMB — sticky под топбаром, показывает раздел,
+   кнопки Назад/Вперёд между секциями
+   ============================================================ */
+.crumb{
+  position:sticky;top:64px;z-index:48;
+  background:rgba(247,248,252,.92);
+  backdrop-filter:saturate(140%) blur(10px);
+  -webkit-backdrop-filter:saturate(140%) blur(10px);
+  border-bottom:1px solid var(--rule);
+}
+.crumb-inner{
+  display:flex;align-items:center;gap:var(--s-3);
+  height:46px;
+}
+.crumb-btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:6px;
+  height:32px;padding:0 12px;
+  background:#fff;border:1px solid var(--rule);border-radius:var(--radius-pill);
+  font-size:12px;font-weight:600;color:var(--ink-soft);letter-spacing:.02em;
+  transition:all var(--t-fast);white-space:nowrap;
+}
+.crumb-btn:hover:not(.is-edge){border-color:var(--sg-blue);color:var(--sg-blue);background:var(--sg-blue-soft)}
+.crumb-btn.is-edge{opacity:.4;cursor:default}
+.crumb-btn svg{width:14px;height:14px;flex-shrink:0}
+.crumb-btn.home{background:var(--sg-blue);color:#fff;border-color:var(--sg-blue)}
+.crumb-btn.home:hover:not(:disabled){background:var(--sg-blue-deep);border-color:var(--sg-blue-deep);color:#fff}
+.crumb-current{
+  margin-left:auto;display:flex;align-items:center;gap:var(--s-3);
+  font-size:12px;color:var(--ink-mute);font-weight:500;
+}
+.crumb-current .num{
+  font-family:var(--font-mono);font-size:11px;color:var(--sg-blue);font-weight:600;
+}
+.crumb-current .title{color:var(--ink);font-weight:700;letter-spacing:-.005em}
+.crumb-current .of{color:var(--ink-faint)}
+.crumb-dots{display:flex;gap:5px}
+.crumb-dot{
+  width:6px;height:6px;border-radius:50%;background:var(--rule-strong);
+  transition:background var(--t-fast),transform var(--t-fast);
+}
+.crumb-dot[data-active="true"]{background:var(--sg-blue);transform:scale(1.4)}
+.crumb-dot[data-visited="true"]{background:var(--sg-teal)}
+
+/* Меню-кнопка для мобильной выпадайки */
+.crumb-menu-btn{display:none}
+
+@media (max-width:1000px){
+  .crumb-current .title-text{display:none}
+  .crumb-current .title-icon{display:inline-flex}
+  .crumb-menu-btn{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:32px;height:32px;
+    background:#fff;border:1px solid var(--rule);border-radius:var(--radius-pill);
+    color:var(--ink-soft);transition:all var(--t-fast);
+  }
+  .crumb-menu-btn:hover{border-color:var(--sg-blue);color:var(--sg-blue)}
+}
+@media (min-width:1001px){
+  .crumb-current .title-icon{display:none}
+}
+@media (max-width:560px){
+  .crumb-inner{gap:6px}
+  .crumb-btn{padding:0 10px;font-size:11px;height:30px}
+  .crumb-btn.label-hide span{display:none}
+  .crumb-dots{display:none}
+}
+
+/* ============================================================
+   MOBILE BOTTOM NAV — плавающая панель на маленьких экранах
+   ============================================================ */
+.mobnav{
+  display:none;
+  position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:60;
+  background:rgba(10,18,48,.78);
+  backdrop-filter:blur(20px) saturate(160%);
+  -webkit-backdrop-filter:blur(20px) saturate(160%);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:var(--radius-pill);
+  padding:5px;
+  box-shadow:
+    0 18px 40px -12px rgba(10,18,48,.45),
+    0 4px 10px -2px rgba(10,18,48,.18),
+    inset 0 1px 0 rgba(255,255,255,.06);
+  gap:1px;
+  max-width:calc(100vw - 24px);
+}
+/* Тонкий вертикальный разделитель между кнопками — даёт ощущение «единой капсулы» */
+.mobnav-btn + .mobnav-btn::before{
+  content:"";position:absolute;left:0;top:25%;height:50%;width:1px;
+  background:rgba(255,255,255,.08);
+}
+.mobnav-btn{
+  position:relative;
+  display:inline-flex;align-items:center;justify-content:center;
+  width:48px;height:38px;padding:0;
+  border-radius:calc(var(--radius-pill) - 2px);
+  color:rgba(255,255,255,.78);
+  transition:background var(--t-fast),color var(--t-fast),transform var(--t-fast);
+}
+.mobnav-btn svg{width:16px;height:16px;flex-shrink:0}
+.mobnav-btn:active:not(.is-edge){transform:scale(.95)}
+.mobnav-btn:hover:not(.is-edge),
+.mobnav-btn:focus-visible{background:rgba(255,255,255,.1);color:#fff}
+.mobnav-btn:focus-visible{outline:none}
+.mobnav-btn.is-edge{opacity:.32;cursor:default}
+/* Home — основная кнопка: акцент-цвет только на самой иконке, без полной заливки */
+.mobnav-btn.primary{color:#5ee0db}
+.mobnav-btn.primary:hover:not(.is-edge),
+.mobnav-btn.primary:active:not(.is-edge){background:rgba(94,224,219,.14);color:#9ef0ec}
+/* «+ перед» для primary не нужен — primary это первая кнопка */
+.mobnav-btn.primary + .mobnav-btn::before{background:rgba(255,255,255,.12)}
+.mobnav-btn .label{display:none}
+@media (max-width:640px){
+  .mobnav{display:flex}
+}
+
+/* Sections drawer (sheet) — раскрывается из мобильной нижней панели */
+.sheet-backdrop{
+  display:none;
+  position:fixed;inset:0;z-index:70;
+  background:rgba(10,18,48,.4);
+  backdrop-filter:blur(4px);
+  -webkit-backdrop-filter:blur(4px);
+  animation:fadeIn .2s ease;
+}
+.sheet-backdrop[data-open="true"]{display:block}
+.sheet{
+  position:fixed;left:0;right:0;bottom:0;z-index:71;
+  background:#fff;border-radius:var(--radius-xl) var(--radius-xl) 0 0;
+  padding:var(--s-5) var(--s-4) calc(var(--s-5) + env(safe-area-inset-bottom));
+  box-shadow:0 -16px 48px -16px rgba(10,18,48,.3);
+  transform:translateY(100%);
+  transition:transform var(--t-mid);
+  max-height:80vh;overflow-y:auto;
+}
+.sheet[data-open="true"]{transform:translateY(0)}
+.sheet-handle{
+  width:40px;height:4px;border-radius:2px;background:var(--rule-strong);
+  margin:0 auto var(--s-4);
+}
+.sheet h4{
+  font-size:11px;text-transform:uppercase;letter-spacing:.16em;color:var(--ink-mute);
+  font-weight:700;margin-bottom:var(--s-3);padding:0 8px;
+}
+.sheet-list{display:flex;flex-direction:column;gap:2px}
+.sheet-list a{
+  display:flex;align-items:center;gap:var(--s-3);
+  padding:14px 14px;border-radius:var(--radius);
+  text-decoration:none;color:var(--ink);
+  transition:background var(--t-fast);
+  font-weight:500;
+}
+.sheet-list a:hover,.sheet-list a:active{background:var(--sg-blue-soft);color:var(--sg-blue)}
+.sheet-list a[data-active="true"]{background:var(--sg-blue-soft);color:var(--sg-blue);font-weight:700}
+.sheet-list a .n{
+  font-family:var(--font-mono);font-size:11px;color:var(--ink-faint);font-weight:600;
+  width:28px;flex-shrink:0;
+}
+.sheet-list a[data-active="true"] .n{color:var(--sg-blue)}
+.sheet-list a .arrow{margin-left:auto;color:var(--ink-faint);transition:transform var(--t-fast)}
+.sheet-list a:hover .arrow{transform:translateX(2px);color:var(--sg-blue)}
+
+/* ============================================================
+   GENERIC SECTION
+   ============================================================ */
+section{padding:40px 0 64px;position:relative}
+@media (max-width:700px){section{padding:32px 0 48px}}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:var(--s-2);
+  font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--sg-blue);font-weight:700;
+  margin-bottom:var(--s-2);
+}
+.eyebrow::before{
+  content:"";display:inline-block;width:20px;height:2px;background:var(--sg-blue);border-radius:2px;
+}
+.section-title{margin-bottom:var(--s-3);max-width:880px}
+.section-lede{font-size:clamp(14px,1.3vw,16px);color:var(--ink-soft);max-width:760px;line-height:1.55;font-weight:300;margin-bottom:var(--s-4)}
+.section-num{
+  position:absolute;top:18px;right:clamp(20px,4vw,40px);
+  font-family:var(--font-mono);font-size:11px;color:var(--ink-faint);
+  letter-spacing:.15em;font-weight:500;
+}
+@media (max-width:700px){.section-num{display:none}}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{
+  padding:var(--s-9) 0 var(--s-9);
+  position:relative;
+  overflow:hidden;
+}
+.hero::before{
+  content:"";position:absolute;top:-40%;right:-20%;width:80%;height:120%;
+  background:radial-gradient(closest-side, rgba(49,93,246,.08), rgba(65,210,205,.04) 50%, transparent 70%);
+  pointer-events:none;z-index:0;
+}
+.hero > .container{position:relative;z-index:1}
+.hero-grid{
+  display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(var(--s-6),5vw,var(--s-8));
+  align-items:end;
+}
+@media (max-width:920px){.hero-grid{grid-template-columns:1fr;gap:var(--s-7)}}
+
+.hero-tag{
+  display:inline-flex;align-items:center;gap:var(--s-3);
+  background:#fff;border:1px solid var(--rule);
+  padding:8px 16px;border-radius:var(--radius-pill);
+  font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-soft);
+  margin-bottom:var(--s-5);
+  box-shadow:var(--shadow-1);
+}
+.hero-tag .dot{
+  width:8px;height:8px;border-radius:50%;background:var(--sg-blue);
+  box-shadow:0 0 0 4px rgba(0,38,186,.16);
+  animation:pulse 2.4s ease-in-out infinite;
+}
+@keyframes pulse{
+  0%,100%{box-shadow:0 0 0 4px rgba(0,38,186,.16)}
+  50%{box-shadow:0 0 0 7px rgba(0,38,186,.08)}
+}
+
+.hero h1{margin-bottom:var(--s-5);font-weight:800}
+.hero h1 em{font-style:normal;color:var(--sg-blue);font-weight:800}
+.hero-lede{
+  font-size:clamp(17px,1.6vw,21px);color:var(--ink-soft);max-width:620px;
+  line-height:1.5;margin-bottom:var(--s-6);font-weight:300;
+}
+
+.hero-actions{display:flex;gap:var(--s-3);flex-wrap:wrap;align-items:center;margin-bottom:var(--s-6)}
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:14px 24px;border-radius:var(--radius-pill);
+  font-size:14px;font-weight:700;letter-spacing:.01em;
+  transition:transform var(--t-fast),box-shadow var(--t-mid),background var(--t-fast),color var(--t-fast),border-color var(--t-fast);
+  min-height:46px;
+}
+.btn-primary{background:var(--sg-blue);color:#fff;box-shadow:var(--shadow-blue)}
+.btn-primary:hover{background:var(--sg-light-blue);transform:translateY(-1px);box-shadow:0 12px 28px -8px rgba(49,93,246,.5)}
+.btn-primary svg{transition:transform var(--t-mid)}
+.btn-primary:hover svg{transform:translateX(3px)}
+.btn-ghost{background:#fff;color:var(--ink);border:1px solid var(--rule)}
+.btn-ghost:hover{background:var(--sg-blue-soft);color:var(--sg-blue);border-color:var(--sg-blue)}
+
+.hero-meta{
+  display:flex;gap:var(--s-6);flex-wrap:wrap;
+  padding-top:var(--s-5);border-top:1px solid var(--rule);
+  font-size:13px;color:var(--ink-mute);
+}
+.hero-meta b{
+  display:block;font-family:var(--font-display);font-size:19px;color:var(--ink);
+  font-weight:700;margin-bottom:2px;letter-spacing:-.005em;
+}
+
+/* HERO — правая визуальная панель: «сумма риска» с крупной цифрой */
+.hero-risk{
+  position:relative;
+  background:linear-gradient(150deg,var(--sg-blue),var(--sg-blue-deep) 75%);
+  color:#fff;
+  border-radius:var(--radius-xl);
+  padding:clamp(28px,3.4vw,44px);
+  box-shadow:var(--shadow-3);
+  overflow:hidden;
+}
+.hero-risk::before{
+  content:"";position:absolute;top:-40%;right:-25%;width:90%;height:140%;
+  background:radial-gradient(closest-side,rgba(65,210,205,.32),rgba(135,69,222,.12) 45%,transparent 75%);
+  pointer-events:none;
+}
+.hero-risk::after{
+  content:"";position:absolute;bottom:-30%;left:-20%;width:70%;height:90%;
+  background:radial-gradient(closest-side,rgba(135,69,222,.28),transparent 70%);
+  pointer-events:none;
+}
+.hero-risk > *{position:relative;z-index:1}
+.hero-risk-label{
+  font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+  color:rgba(255,255,255,.7);margin-bottom:var(--s-4);font-weight:600;
+}
+.hero-risk-amount{
+  font-family:var(--font-display);font-weight:300;
+  font-size:clamp(58px,8.8vw,118px);line-height:.95;letter-spacing:-.05em;
+  color:#fff;
+  display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;
+}
+.hero-risk-amount span{font-size:.32em;color:rgba(255,255,255,.65);font-weight:400;letter-spacing:0}
+.hero-risk-amount em{font-style:normal;color:var(--sg-teal);font-weight:300}
+.hero-risk-break{
+  display:grid;grid-template-columns:1fr 1fr;gap:var(--s-4);
+  margin-top:var(--s-5);padding-top:var(--s-5);
+  border-top:1px solid rgba(255,255,255,.16);
+  font-size:13px;
+}
+.hero-risk-break div b{
+  display:block;font-family:var(--font-display);font-size:26px;color:#fff;
+  font-weight:300;margin-bottom:4px;line-height:1.1;letter-spacing:-.02em;
+}
+.hero-risk-break div span{color:rgba(255,255,255,.65);font-size:12px;letter-spacing:.02em;font-weight:400}
+.hero-risk-thesis{
+  margin-top:var(--s-5);padding:var(--s-4) var(--s-5);border-radius:var(--radius);
+  background:rgba(255,255,255,.1);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  border-left:3px solid var(--sg-teal);
+  font-size:14.5px;line-height:1.5;color:rgba(255,255,255,.92);font-weight:400;
+}
+.hero-risk-thesis b{color:#fff;font-weight:700}
+
+/* Декоративные параграфы внизу hero */
+.hero-deco{display:none}
+
+/* ============================================================
+   SNAPSHOT — ключевые факты в стиле Agriga (крупные тонкие цифры)
+   ============================================================ */
+.snapshot{
+  background:var(--surface);
+  border-top:1px solid var(--rule);
+  border-bottom:1px solid var(--rule);
+  padding:var(--s-7) 0;
+}
+.snapshot-grid{
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--s-4);
+}
+@media (max-width:1024px){.snapshot-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.snapshot-grid{grid-template-columns:1fr}}
+.snap{
+  background:#fff;
+  padding:22px 22px 24px;
+  border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-1);
+  transition:transform var(--t-fast),box-shadow var(--t-fast);
+  position:relative;overflow:hidden;
+  display:flex;flex-direction:column;gap:10px;
+  min-width:0;
+}
+.snap:hover{transform:translateY(-3px);box-shadow:var(--shadow-2)}
+.snap::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:3px;
+  background:var(--sg-blue);opacity:0;transition:opacity var(--t-fast);
+}
+.snap:hover::after{opacity:1}
+.snap:nth-child(1)::after{background:var(--sg-blue)}
+.snap:nth-child(2)::after{background:var(--sg-light-blue)}
+.snap:nth-child(3)::after{background:var(--sg-violet)}
+.snap:nth-child(4)::after{background:var(--sg-teal)}
+
+.snap-k{
+  font-family:var(--font-mono);font-size:10px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--ink-mute);font-weight:600;
+}
+/* Базовый стиль значения: компактный, читаемый, без обрыва слов */
+.snap-v{
+  font-family:var(--font-display);
+  font-size:clamp(17px,1.6vw,22px);
+  font-weight:700;
+  line-height:1.2;
+  letter-spacing:-.01em;
+  color:var(--ink);
+  /* Разрешаем перенос длинных слов целиком, но не побуквенно */
+  overflow-wrap:break-word;
+  word-break:normal;
+  hyphens:none;
+}
+/* Числовое значение: крупный тонкий шрифт в стиле Agriga */
+.snap-v.is-num{
+  font-size:clamp(30px,3vw,42px);
+  font-weight:300;
+  letter-spacing:-.03em;
+  line-height:1;
+}
+.snap:nth-child(1) .snap-v{color:var(--sg-blue)}
+.snap:nth-child(2) .snap-v{color:var(--sg-light-blue)}
+.snap:nth-child(3) .snap-v{color:var(--sg-violet)}
+.snap:nth-child(4) .snap-v{color:var(--sg-teal)}
+.snap-sub{font-size:12.5px;color:var(--ink-soft);line-height:1.5;font-weight:400;margin-top:auto}
+
+
+/* ============================================================
+   TIMELINE
+   ============================================================ */
+.tl-wrap{position:relative;margin-top:var(--s-4)}
+.tl-track{
+  display:grid;grid-template-columns:repeat(5,minmax(200px,1fr));gap:0;
+  position:relative;
+}
+.tl-track::before{
+  content:"";position:absolute;left:0;right:0;top:24px;height:1px;
+  background:linear-gradient(90deg,var(--rule) 0%,var(--copper) 50%,var(--ink) 100%);
+}
+@media (max-width:900px){
+  .tl-track{grid-template-columns:1fr;gap:0}
+  .tl-track::before{left:18px;right:auto;top:0;bottom:0;width:1px;height:auto;
+    background:linear-gradient(180deg,var(--rule) 0%,var(--sg-light-blue) 50%,var(--sg-blue) 100%);}
+}
+.tl-item{position:relative;padding:0 var(--s-2)}
+@media (max-width:900px){.tl-item{padding:0 0 var(--s-4) var(--s-7)}}
+
+.tl-dot{
+  position:relative;z-index:2;
+  width:18px;height:18px;border-radius:50%;
+  background:#fff;border:2px solid var(--sg-blue);
+  margin:15px 0 12px;
+  transition:transform var(--t-fast),border-color var(--t-fast),background var(--t-fast);
+  box-shadow:0 0 0 4px rgba(0,38,186,.1);
+}
+@media (max-width:900px){.tl-dot{position:absolute;left:8px;top:6px;margin:0}}
+.tl-item[data-phase="risk"] .tl-dot{border-color:var(--sg-violet);background:var(--sg-violet);box-shadow:0 0 0 4px rgba(135,69,222,.18)}
+.tl-item[data-phase="court"] .tl-dot{border-color:var(--sg-blue);background:var(--sg-blue);box-shadow:0 0 0 4px rgba(0,38,186,.18)}
+
+/* PULSE: расходящиеся волны на активном кружочке (карточка раскрыта) */
+@keyframes tl-pulse-blue {
+  0%   { box-shadow: 0 0 0 4px rgba(0,38,186,.18),  0 0 0 0   rgba(0,38,186,.45); }
+  70%  { box-shadow: 0 0 0 4px rgba(0,38,186,.18),  0 0 0 22px rgba(0,38,186,0);   }
+  100% { box-shadow: 0 0 0 4px rgba(0,38,186,.18),  0 0 0 0   rgba(0,38,186,0);   }
+}
+@keyframes tl-pulse-violet {
+  0%   { box-shadow: 0 0 0 4px rgba(135,69,222,.18), 0 0 0 0   rgba(135,69,222,.45); }
+  70%  { box-shadow: 0 0 0 4px rgba(135,69,222,.18), 0 0 0 22px rgba(135,69,222,0);   }
+  100% { box-shadow: 0 0 0 4px rgba(135,69,222,.18), 0 0 0 0   rgba(135,69,222,0);   }
+}
+/* Активный кружочек: больше, ярче, пульсирует */
+.tl-item.is-active .tl-dot{
+  background:var(--sg-blue);border-color:var(--sg-blue);
+  transform:scale(1.25);
+  animation:tl-pulse-blue 1.8s ease-out infinite;
+}
+.tl-item.is-active[data-phase="risk"] .tl-dot{
+  background:var(--sg-violet);border-color:var(--sg-violet);
+  animation:tl-pulse-violet 1.8s ease-out infinite;
+}
+.tl-item.is-active[data-phase="court"] .tl-dot{
+  background:var(--sg-blue);border-color:var(--sg-blue);
+  animation:tl-pulse-blue 1.8s ease-out infinite;
+}
+
+
+/* ============================================================
+   FIX 2026-05-22 — iOS / Android mobile reliability
+   Цель: одинаковая работа в Safari iOS, Chrome Android и мобильных preview.
+   ============================================================ */
+html, body{
+  width:100%;
+  max-width:100%;
+  overscroll-behavior-y:auto;
+}
+section, .hero, .snapshot, .parties, .risk, .exec{
+  scroll-margin-top:116px;
+}
+.btn, .crumb-btn, .mobnav-btn, .dispute-tab, .quiz-opt, .quiz-next,
+.tl-card, .ev-card, .risk-row, .cl-row, .party-node, .flow-line, .flow-hit{
+  -webkit-tap-highlight-color:rgba(0,38,186,.10);
+  touch-action:manipulation;
+  cursor:pointer;
+}
+.btn{ text-decoration:none; }
+@media (hover:none) and (pointer:coarse){
+  .tl-track{
+    grid-template-columns:1fr !important;
+    gap:0 !important;
+  }
+  .tl-track::before{
+    left:18px !important;right:auto !important;top:0 !important;bottom:0 !important;
+    width:1px !important;height:auto !important;
+    background:linear-gradient(180deg,var(--rule) 0%,var(--sg-light-blue) 50%,var(--sg-blue) 100%) !important;
+  }
+  .tl-item{padding:0 0 var(--s-4) var(--s-7) !important;}
+  .tl-dot{position:absolute !important;left:8px !important;top:6px !important;margin:0 !important;}
+  .dispute-controls{
+    overflow-x:auto;
+    flex-wrap:nowrap;
+    -webkit-overflow-scrolling:touch;
+    padding-bottom:8px;
+    margin-right:calc(-1 * clamp(20px,4vw,40px));
+    scroll-snap-type:x proximity;
+  }
+  .dispute-tab{
+    flex:0 0 auto;
+    scroll-snap-align:start;
+    min-height:42px;
+  }
+  .risk-meter,.cl-summary{position:static !important;top:auto !important;}
+}
+@media (max-width:640px), (hover:none) and (pointer:coarse){
+  body{font-size:15px;}
+  .container{padding-inline:18px;}
+  .topbar-inner{height:58px;gap:12px;}
+  .brand-mark{width:34px;height:34px;}
+  .brand small{font-size:9px;}
+  .brand b{font-size:14px;}
+  .crumb{top:58px;}
+  .progress{top:58px;}
+  .crumb-inner{height:42px;}
+  section{padding:30px 0 46px;scroll-margin-top:108px;}
+  .hero{
+    padding:28px 0 40px !important;
+    min-height:auto !important;
+    display:block !important;
+  }
+  .hero-grid{grid-template-columns:1fr !important;gap:24px !important;align-items:start !important;}
+  .hero-tag{font-size:10px;letter-spacing:.10em;margin-bottom:14px;padding:7px 12px;}
+  .hero h1{font-size:clamp(36px,11.2vw,48px) !important;line-height:1.04 !important;margin-bottom:14px !important;}
+  .hero-lede{font-size:15.5px !important;line-height:1.48 !important;margin-bottom:20px !important;}
+  .hero-actions{margin-bottom:20px !important;gap:10px;}
+  .btn{min-height:44px;padding:12px 18px;font-size:13px;}
+  .hero-meta{display:none;}
+  .hero-risk{padding:22px 20px !important;border-radius:22px;}
+  .hero-risk-label{font-size:10px;margin-bottom:12px !important;}
+  .hero-risk-amount{font-size:64px !important;}
+  .hero-risk-break{grid-template-columns:1fr 1fr;margin-top:16px !important;padding-top:14px !important;gap:10px;}
+  .hero-risk-break div b{font-size:21px !important;}
+  .hero-risk-thesis{margin-top:14px !important;padding:13px 15px !important;font-size:13px !important;line-height:1.42 !important;}
+  .snapshot-grid,.evidence-grid{grid-template-columns:1fr !important;}
+  .dispute-cols,.risk-wrap,.checklist-wrap,.parties-wrap{grid-template-columns:1fr !important;}
+  .quiz{padding:22px 14px;margin-top:22px;border-radius:22px;}
+  .quiz-progress{align-items:flex-start;gap:10px;}
+  .quiz-dots{gap:6px;flex-wrap:wrap;justify-content:flex-end;max-width:120px;}
+  .quiz-question{font-size:22px;line-height:1.28;margin-bottom:18px;}
+  .quiz-opt{padding:13px 12px;min-height:54px;font-size:13.5px;line-height:1.45;}
+  .quiz-opt:hover{transform:none;}
+  .quiz-next{width:100%;justify-content:center;}
+  .mobnav{bottom:calc(12px + env(safe-area-inset-bottom));}
+  footer{padding-bottom:calc(var(--s-7) + 92px + env(safe-area-inset-bottom));}
+}
+
+@media (prefers-reduced-motion: reduce){
+  .tl-item.is-active .tl-dot{animation:none}
+}
+
+.tl-year{
+  font-family:var(--font-display);font-size:11px;letter-spacing:.14em;font-weight:700;
+  text-transform:uppercase;color:var(--sg-blue);margin-bottom:6px;
+}
+.tl-title{font-family:var(--font-display);font-size:15px;font-weight:700;line-height:1.25;margin-bottom:10px;color:var(--ink);letter-spacing:-.005em}
+.tl-card{
+  background:#fff;border:1px solid var(--rule);
+  border-radius:var(--radius);padding:14px 16px;
+  cursor:pointer;
+  transition:border-color var(--t-fast),box-shadow var(--t-fast),transform var(--t-fast);
+  position:relative;
+}
+.tl-card:hover{border-color:var(--sg-blue);box-shadow:var(--shadow-2);transform:translateY(-2px)}
+.tl-card[aria-expanded="true"]{border-color:var(--sg-blue);box-shadow:var(--shadow-3);background:linear-gradient(180deg,var(--sg-blue-pale),#fff)}
+.tl-card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:var(--s-2)}
+.tl-card-toggle{
+  flex-shrink:0;width:24px;height:24px;border-radius:50%;border:1px solid var(--rule);
+  display:flex;align-items:center;justify-content:center;
+  transition:transform var(--t-mid),background var(--t-fast),color var(--t-fast),border-color var(--t-fast);
+  margin-top:2px;color:var(--ink-mute);
+}
+.tl-card:hover .tl-card-toggle{border-color:var(--sg-blue);color:var(--sg-blue)}
+.tl-card[aria-expanded="true"] .tl-card-toggle{transform:rotate(45deg);background:var(--sg-blue);color:#fff;border-color:var(--sg-blue)}
+.tl-card-toggle svg{width:10px;height:10px}
+/* Свёрнутый summary — 3 строки, троеточие в конце */
+.tl-summary{
+  font-size:12.5px;color:var(--ink-soft);line-height:1.45;font-weight:400;
+  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;
+  overflow:hidden;
+}
+.tl-card[aria-expanded="true"] .tl-summary{
+  -webkit-line-clamp:unset;overflow:visible;
+}
+
+.tl-detail{
+  max-height:0;overflow:hidden;
+  transition:max-height var(--t-slow),margin-top var(--t-mid),padding-top var(--t-mid),opacity var(--t-mid);
+  opacity:0;
+}
+.tl-card[aria-expanded="true"] .tl-detail{
+  max-height:1200px;opacity:1;
+  margin-top:var(--s-4);padding-top:var(--s-4);
+  border-top:1px solid rgba(0,38,186,.18);
+}
+.tl-detail dl{margin:0;display:grid;gap:var(--s-3)}
+.tl-detail dt{
+  font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--sg-blue);font-weight:700;margin-bottom:2px;
+}
+.tl-detail dd{margin:0;font-size:14px;line-height:1.5;color:var(--ink-soft);font-weight:400}
+.tl-detail dd b{color:var(--ink);font-weight:700}
+
+/* ============================================================
+   PARTIES MAP
+   ============================================================ */
+.parties{position:relative;background:var(--surface)}
+.parties-wrap{
+  display:grid;grid-template-columns:1.4fr 1fr;gap:var(--s-7);
+  align-items:start;margin-top:var(--s-6);
+}
+@media (max-width:1000px){.parties-wrap{grid-template-columns:1fr;gap:var(--s-5)}}
+
+.parties-svg-wrap{
+  background:#fff;
+  border:1px solid var(--rule);border-radius:var(--radius-lg);
+  padding:clamp(16px,2.2vw,32px);
+  position:relative;overflow:hidden;
+  box-shadow:var(--shadow-2);
+}
+.parties-svg-wrap::before{
+  content:"СХЕМА";position:absolute;top:14px;right:18px;
+  font-family:var(--font-mono);font-size:10px;letter-spacing:.2em;color:var(--ink-mute);font-weight:600;
+}
+.parties-svg{width:100%;height:auto;display:block}
+
+/* Кнопка-разворот в углу схемы */
+.svg-zoom-btn{
+  position:absolute;top:12px;left:12px;z-index:2;
+  display:inline-flex;align-items:center;gap:6px;
+  height:30px;padding:0 12px;
+  background:var(--sg-blue);color:#fff;
+  border-radius:var(--radius-pill);
+  font-size:11px;font-weight:700;letter-spacing:.05em;
+  box-shadow:var(--shadow-blue);
+  transition:background var(--t-fast),transform var(--t-fast);
+}
+.svg-zoom-btn:hover{background:var(--sg-blue-deep);transform:translateY(-1px)}
+.svg-zoom-btn svg{width:12px;height:12px}
+
+.party-node{cursor:pointer;transition:transform var(--t-fast)}
+.party-node:hover{transform:translateY(-2px)}
+.party-node:hover rect, .party-node:hover circle{filter:brightness(1.04)}
+.party-node rect, .party-node circle{
+  transition:fill var(--t-fast),stroke var(--t-fast),stroke-width var(--t-fast),filter var(--t-fast);
+}
+.party-node text{font-family:var(--font-body);font-size:13px;font-weight:700;fill:var(--ink);pointer-events:none;letter-spacing:-.005em}
+.party-node .role{font-size:10.5px;font-weight:600;fill:var(--ink-mute);letter-spacing:.05em;text-transform:uppercase}
+.party-node[data-active="true"] rect,.party-node[data-active="true"] circle{stroke-width:3.5;filter:drop-shadow(0 4px 10px rgba(0,38,186,.3))}
+.party-node.ru rect{fill:#fff;stroke:var(--sg-blue);stroke-width:2}
+.party-node.foreign rect{fill:var(--sg-blue-soft);stroke:var(--sg-light-blue);stroke-width:2}
+.party-node.benef circle{fill:#fff;stroke:var(--sg-teal);stroke-width:2.5}
+.party-node.tax rect{fill:var(--sg-violet-soft);stroke:var(--sg-violet);stroke-width:2}
+.party-node.court rect{fill:var(--sg-blue);stroke:var(--sg-blue)}
+.party-node.court text{fill:#fff}
+.party-node.court .role{fill:rgba(255,255,255,.72)}
+
+/* Линии потоков — теперь тоже кликабельные */
+.flow-line{
+  stroke-width:1.8;fill:none;cursor:pointer;
+  transition:stroke var(--t-fast),stroke-width var(--t-fast),filter var(--t-fast);
+  pointer-events:stroke;    /* критично: иначе тонкие линии трудно попасть */
+}
+.flow-line:hover{stroke-width:3.2;filter:drop-shadow(0 2px 4px rgba(10,18,48,.18))}
+.flow-line[data-active="true"]{stroke-width:3.5;filter:drop-shadow(0 2px 6px rgba(0,38,186,.3))}
+.flow-line.loan{stroke:var(--sg-blue)}
+.flow-line.interest{stroke:var(--sg-light-blue);stroke-dasharray:6 4}
+.flow-line.capital{stroke:var(--sg-violet);stroke-width:3}
+.flow-line.capital:hover{stroke-width:4.5}
+.flow-line.tax{stroke:var(--sg-violet);stroke-dasharray:4 3;stroke-width:2}
+.flow-line.claim{stroke:var(--sg-teal);stroke-dasharray:5 3}
+.flow-line.support{stroke:#0a1230}
+
+/* Невидимая широкая обводка для увеличения hit-area тонких линий.
+   pointer-events:stroke даёт клик-зону даже при stroke:transparent. */
+.flow-hit{
+  stroke:transparent;stroke-width:18;fill:none;cursor:pointer;
+  pointer-events:stroke;
+}
+
+.flow-label{
+  font-family:var(--font-mono);font-size:10.5px;font-weight:600;
+  fill:var(--ink-mute);letter-spacing:.06em;text-transform:uppercase;
+  pointer-events:none;
+}
+
+.parties-side{position:relative}
+.parties-legend{
+  background:#fff;border:1px solid var(--rule);border-radius:var(--radius-lg);
+  padding:var(--s-4);box-shadow:var(--shadow-1);
+}
+.parties-legend h4{margin-bottom:var(--s-3);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-mute);font-weight:700}
+.legend-row{display:flex;align-items:center;gap:12px;font-size:12.5px;color:var(--ink-soft);padding:5px 0;font-weight:400;line-height:1.4}
+.legend-row b{color:var(--ink);font-weight:700}
+/* Линия-образец теперь — inline SVG, чтобы dashed pattern был визуально читаемым */
+.legend-line{
+  width:46px;height:10px;flex-shrink:0;display:block;
+}
+.legend-line svg{display:block;overflow:visible}
+
+.party-detail{
+  margin-top:var(--s-4);
+  background:#fff;border:1px solid var(--rule);border-radius:var(--radius-lg);
+  padding:var(--s-5);min-height:260px;position:relative;
+  transition:border-color var(--t-fast),box-shadow var(--t-fast);
+  box-shadow:var(--shadow-1);
+}
+.party-detail[data-state="active"]{border-color:var(--sg-blue);box-shadow:var(--shadow-2)}
+.party-detail-eyebrow{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--sg-blue);margin-bottom:var(--s-2);font-weight:700}
+.party-detail h3{font-family:var(--font-display);font-weight:700;margin-bottom:var(--s-3);font-size:22px;letter-spacing:-.015em}
+.party-detail p{font-size:14.5px;line-height:1.55;color:var(--ink-soft);margin-bottom:var(--s-3);font-weight:400}
+.party-detail .pd-meta{
+  display:flex;flex-wrap:wrap;gap:var(--s-2);margin-top:var(--s-3);
+  padding-top:var(--s-3);border-top:1px solid var(--rule);
+}
+.pd-tag{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--surface);border:1px solid var(--rule);
+  padding:5px 11px;border-radius:var(--radius-pill);
+  font-size:11.5px;color:var(--ink-soft);letter-spacing:.02em;font-weight:500;
+}
+.pd-tag.copper{border-color:var(--sg-violet-soft);color:var(--sg-violet);background:var(--sg-violet-soft)}
+.pd-tag.petrol{border-color:var(--sg-teal-soft);color:#1f8a86;background:var(--sg-teal-soft)}
+
+/* ============================================================
+   SCHEMA LIGHTBOX — fullscreen-просмотр схемы по клику
+   ============================================================ */
+.schema-lightbox{
+  position:fixed;inset:0;z-index:100;
+  background:rgba(10,18,48,.94);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  display:none;
+  padding:clamp(12px,2vw,32px);
+  overflow:auto;
+}
+.schema-lightbox[data-open="true"]{
+  display:flex;flex-direction:column;
+  animation:fadeIn .2s ease;
+}
+.sl-bar{
+  display:flex;align-items:center;gap:var(--s-3);
+  margin-bottom:12px;flex-shrink:0;
+}
+.sl-bar h3{color:#fff;font-size:18px;font-weight:700;letter-spacing:-.005em;margin:0}
+.sl-bar .sl-hint{
+  color:rgba(255,255,255,.6);font-size:12px;font-weight:500;
+  margin-left:auto;
+}
+@media (max-width:640px){.sl-bar .sl-hint{display:none}}
+.sl-close{
+  flex-shrink:0;
+  width:40px;height:40px;border-radius:50%;
+  background:rgba(255,255,255,.12);color:#fff;
+  display:inline-flex;align-items:center;justify-content:center;
+  transition:background var(--t-fast);
+}
+.sl-close:hover{background:rgba(255,255,255,.22)}
+.sl-close svg{width:18px;height:18px}
+
+.sl-body{
+  flex:1;display:grid;grid-template-columns:1fr 360px;gap:16px;
+  min-height:0;
+}
+@media (max-width:1000px){
+  .sl-body{grid-template-columns:1fr;grid-template-rows:1fr auto}
+}
+.sl-svg-wrap{
+  background:#fff;border-radius:var(--radius-lg);
+  padding:clamp(16px,2.5vw,32px);
+  display:flex;align-items:center;justify-content:center;
+  overflow:auto;
+  min-height:0;
+}
+.sl-svg-wrap svg{width:100%;height:auto;max-width:1200px}
+.sl-side{
+  background:#fff;border-radius:var(--radius-lg);padding:var(--s-4);
+  overflow-y:auto;
+  max-height:100%;
+}
+.sl-side .sl-detail-eyebrow{
+  font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--sg-blue);margin-bottom:8px;font-weight:700;
+}
+.sl-side h3{font-family:var(--font-display);font-weight:700;font-size:20px;line-height:1.2;margin:0 0 var(--s-3);color:var(--ink);letter-spacing:-.01em}
+.sl-side p{font-size:13.5px;line-height:1.55;color:var(--ink-soft);margin:0 0 var(--s-3);font-weight:400}
+.sl-side p strong{color:var(--ink);font-weight:700}
+.sl-side .pd-meta{
+  display:flex;flex-wrap:wrap;gap:6px;margin-top:var(--s-3);
+  padding-top:var(--s-3);border-top:1px solid var(--rule);
+}
+
+.sl-tabs{
+  display:flex;gap:6px;flex-wrap:wrap;margin-bottom:var(--s-3);
+  padding-bottom:var(--s-3);border-bottom:1px solid var(--rule);
+}
+.sl-tab{
+  font-size:11px;font-weight:600;color:var(--ink-soft);letter-spacing:.04em;
+  padding:5px 10px;border-radius:var(--radius-pill);background:var(--surface);
+  border:1px solid var(--rule);transition:all var(--t-fast);
+}
+.sl-tab[data-active="true"]{background:var(--sg-blue);color:#fff;border-color:var(--sg-blue)}
+@media (max-width:640px){.sl-side{max-height:38vh}}
+
+/* ============================================================
+   DISPUTE MATRIX
+   ============================================================ */
+.dispute{}
+.dispute-controls{
+  display:flex;flex-wrap:wrap;gap:var(--s-2);margin:var(--s-5) 0 var(--s-6);
+}
+.dispute-tab{
+  padding:10px 16px;border-radius:var(--radius-pill);
+  background:#fff;border:1px solid var(--rule);
+  font-size:12.5px;font-weight:600;color:var(--ink-soft);letter-spacing:.01em;
+  transition:all var(--t-fast);
+  min-height:40px;
+}
+.dispute-tab:hover{background:var(--sg-blue-soft);color:var(--sg-blue);border-color:var(--sg-blue)}
+.dispute-tab[aria-selected="true"]{background:var(--sg-blue);color:#fff;border-color:var(--sg-blue);box-shadow:var(--shadow-blue)}
+.dispute-tab .num{
+  display:inline-block;font-family:var(--font-mono);font-size:10px;font-weight:500;
+  margin-right:8px;opacity:.7;
+}
+
+.dispute-panel{
+  display:none;
+  animation:fadeIn .4s ease;
+}
+.dispute-panel[data-active="true"]{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+.dispute-q{
+  font-family:var(--font-display);font-size:clamp(22px,2.6vw,32px);font-weight:800;
+  margin-bottom:var(--s-5);max-width:880px;letter-spacing:-.02em;line-height:1.2;
+}
+
+.dispute-cols{
+  display:grid;grid-template-columns:1fr 1fr 1.1fr;gap:var(--s-4);
+  margin-bottom:var(--s-4);
+}
+@media (max-width:900px){.dispute-cols{grid-template-columns:1fr;gap:var(--s-3)}}
+
+.dispute-col{
+  border:1px solid var(--rule);border-radius:var(--radius-lg);
+  padding:var(--s-5);background:#fff;
+  position:relative;overflow:hidden;
+  transition:transform var(--t-fast),box-shadow var(--t-fast);
+}
+.dispute-col::before{
+  content:"";position:absolute;left:0;right:0;top:0;height:4px;
+}
+.dispute-col:hover{transform:translateY(-3px);box-shadow:var(--shadow-2)}
+.dispute-col.taxpayer::before{background:var(--ink-mute)}
+.dispute-col.tax-authority::before{background:var(--sg-violet)}
+.dispute-col.court::before{background:var(--sg-blue)}
+.dispute-col.court{background:linear-gradient(180deg,var(--sg-blue-pale),#fff 60%)}
+
+.dispute-col-head{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:var(--s-4);
+}
+.dispute-col h4{font-family:var(--font-display);font-size:18px;font-weight:700;letter-spacing:-.01em}
+.dispute-col .verdict{font-family:var(--font-mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-mute);font-weight:600}
+.dispute-col.court .verdict{color:var(--sg-blue);font-weight:700}
+.dispute-col.tax-authority .verdict{color:var(--sg-violet);font-weight:700}
+.dispute-col p{font-size:14.5px;line-height:1.6;color:var(--ink-soft);margin-bottom:0;font-weight:400}
+.dispute-col p strong{color:var(--ink)}
+
+.takeaway{
+  background:linear-gradient(135deg,var(--sg-teal-soft),var(--sg-blue-soft));
+  border-left:4px solid var(--sg-teal);
+  padding:var(--s-5) var(--s-5);
+  border-radius:var(--radius-lg);
+}
+.takeaway-label{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#1f8a86;font-weight:700;margin-bottom:var(--s-2)}
+.takeaway p{font-size:15px;line-height:1.6;margin:0;color:var(--ink);font-weight:400}
+.takeaway p strong{font-weight:700}
+
+/* ============================================================
+   RISK ENGINE
+   ============================================================ */
+.risk{background:var(--surface)}
+.risk-wrap{
+  display:grid;grid-template-columns:1.2fr 1fr;gap:var(--s-6);
+  margin-top:var(--s-6);align-items:start;
+}
+@media (max-width:1000px){.risk-wrap{grid-template-columns:1fr;gap:var(--s-5)}}
+
+.risk-conditions{
+  background:#fff;border:1px solid var(--rule);border-radius:var(--radius-lg);
+  padding:var(--s-5) var(--s-6);box-shadow:var(--shadow-1);
+}
+.risk-conditions h4{margin-bottom:var(--s-4);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-mute);font-weight:700}
+
+.risk-row{
+  display:flex;align-items:flex-start;gap:var(--s-3);
+  padding:var(--s-3) 0;border-bottom:1px solid var(--rule-soft);
+  cursor:pointer;
+  transition:padding var(--t-fast);
+}
+.risk-row:last-child{border-bottom:0}
+.risk-row:hover .risk-label-main{color:var(--ink)}
+.risk-row:hover{padding-left:6px}
+
+.risk-check{
+  flex-shrink:0;width:24px;height:24px;border-radius:8px;
+  border:1.5px solid var(--rule-strong);background:#fff;
+  display:flex;align-items:center;justify-content:center;
+  transition:all var(--t-fast);margin-top:1px;
+}
+.risk-check svg{width:14px;height:14px;opacity:0;transition:opacity var(--t-fast)}
+.risk-row[data-checked="true"] .risk-check{background:var(--sg-blue);border-color:var(--sg-blue);box-shadow:0 4px 12px -4px rgba(0,38,186,.4)}
+.risk-row[data-checked="true"] .risk-check svg{opacity:1;color:#fff}
+
+.risk-label{flex:1}
+.risk-label-main{font-size:14.5px;font-weight:600;color:var(--ink-soft);line-height:1.4;transition:color var(--t-fast)}
+.risk-row[data-checked="true"] .risk-label-main{color:var(--ink)}
+.risk-label-sub{font-size:12.5px;color:var(--ink-mute);margin-top:3px;line-height:1.45;font-weight:400}
+
+/* Risk meter */
+.risk-meter{
+  background:#fff;border:1px solid var(--rule);border-radius:var(--radius-lg);
+  padding:var(--s-5) var(--s-6);
+  position:sticky;top:130px;
+  box-shadow:var(--shadow-1);
+}
+.risk-meter h4{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-mute);font-weight:700;margin-bottom:var(--s-4)}
+
+.risk-gauge{
+  position:relative;width:100%;aspect-ratio:200/120;
+  margin-bottom:var(--s-5);
+}
+.risk-gauge svg{width:100%;height:100%}
+.risk-arc-bg{stroke:var(--sg-blue-soft);fill:none;stroke-width:12;stroke-linecap:round}
+.risk-arc{
+  fill:none;stroke-width:12;stroke-linecap:round;
+  transition:stroke-dashoffset var(--t-slow);
+  filter:drop-shadow(0 2px 6px rgba(0,38,186,.18));
+}
+.risk-ticks circle{fill:var(--rule-strong)}
+.risk-gauge-text{
+  position:absolute;left:0;right:0;bottom:4%;text-align:center;
+}
+.risk-gauge-level{
+  font-family:var(--font-display);font-size:clamp(26px,3.4vw,38px);
+  font-weight:700;letter-spacing:-.02em;line-height:1;
+  color:var(--sg-teal);
+  transition:color var(--t-mid);
+}
+.risk-gauge-label{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-mute);margin-top:8px;font-weight:600}
+
+.risk-explainer{
+  border-top:1px solid var(--rule);padding-top:var(--s-4);
+  font-size:14px;line-height:1.6;color:var(--ink-soft);
+  min-height:90px;font-weight:400;
+}
+.risk-explainer b{color:var(--ink);font-weight:700}
+
+.risk-actions{
+  display:flex;gap:var(--s-2);margin-top:var(--s-5);
+}
+.risk-actions button{
+  flex:1;padding:10px 14px;border-radius:var(--radius-pill);
+  background:#fff;border:1px solid var(--rule);
+  font-size:12px;font-weight:600;letter-spacing:.04em;color:var(--ink-soft);
+  transition:all var(--t-fast);
+  min-height:40px;
+}
+.risk-actions button:hover{border-color:var(--sg-blue);background:var(--sg-blue-soft);color:var(--sg-blue)}
+
+/* ============================================================
+   EVIDENCE LAB
+   ============================================================ */
+.evidence-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));
+  gap:var(--s-4);margin-top:var(--s-6);
+}
+.ev-card{
+  background:#fff;
+  border:1px solid var(--rule);
+  border-radius:var(--radius-lg);
+  padding:var(--s-5);
+  cursor:pointer;
+  transition:all var(--t-fast);
+  position:relative;
+  display:flex;flex-direction:column;gap:var(--s-3);
+  min-height:200px;
+  box-shadow:var(--shadow-1);
+}
+.ev-card::before{
+  content:attr(data-num);
+  position:absolute;top:var(--s-3);right:var(--s-4);
+  font-family:var(--font-mono);font-size:10px;letter-spacing:.16em;font-weight:600;
+  color:var(--ink-faint);
+}
+.ev-card:hover{border-color:var(--sg-blue);transform:translateY(-4px);box-shadow:var(--shadow-2)}
+.ev-card[aria-expanded="true"]{
+  border-color:var(--sg-blue);box-shadow:var(--shadow-2);
+  background:linear-gradient(180deg,var(--sg-blue-pale),#fff 60%);
+}
+.ev-status{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--sg-violet);font-weight:700;
+}
+.ev-status::before{
+  content:"";width:8px;height:8px;border-radius:50%;background:var(--sg-violet);
+  box-shadow:0 0 0 3px rgba(135,69,222,.18);
+}
+.ev-card h4{font-family:var(--font-display);font-size:18px;font-weight:700;letter-spacing:-.01em;line-height:1.3;color:var(--ink)}
+.ev-card-summary{font-size:13.5px;line-height:1.55;color:var(--ink-soft);flex:1;font-weight:400}
+
+.ev-detail{
+  max-height:0;overflow:hidden;opacity:0;
+  transition:max-height var(--t-slow),opacity var(--t-mid),margin-top var(--t-mid),padding-top var(--t-mid);
+}
+.ev-card[aria-expanded="true"] .ev-detail{
+  max-height:800px;opacity:1;
+  margin-top:var(--s-2);padding-top:var(--s-3);
+  border-top:1px solid var(--rule);
+}
+.ev-detail-block{margin-bottom:var(--s-3)}
+.ev-detail-block:last-child{margin-bottom:0}
+.ev-detail-block dt{
+  font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--sg-blue);font-weight:700;margin-bottom:4px;
+}
+.ev-detail-block dd{margin:0;font-size:13.5px;line-height:1.55;color:var(--ink-soft);font-weight:400}
+.ev-detail-block.fix dd{color:#1f8a86}
+
+/* ============================================================
+   CHECKLIST
+   ============================================================ */
+.checklist-wrap{
+  display:grid;grid-template-columns:1.5fr 1fr;gap:var(--s-6);
+  margin-top:var(--s-6);align-items:start;
+}
+@media (max-width:1000px){.checklist-wrap{grid-template-columns:1fr}}
+
+.checklist{
+  background:#fff;border:1px solid var(--rule);
+  border-radius:var(--radius-lg);overflow:hidden;
+  box-shadow:var(--shadow-1);
+}
+.cl-row{
+  display:flex;align-items:center;gap:var(--s-4);
+  padding:var(--s-4) var(--s-5);
+  border-bottom:1px solid var(--rule-soft);
+  cursor:pointer;
+  transition:background var(--t-fast),padding var(--t-fast);
+}
+.cl-row:last-child{border-bottom:0}
+.cl-row:hover{background:var(--sg-blue-pale);padding-left:calc(var(--s-5) + 6px)}
+.cl-num{
+  font-family:var(--font-mono);font-size:11px;color:var(--ink-faint);font-weight:600;
+  letter-spacing:.1em;width:26px;flex-shrink:0;
+}
+.cl-check{
+  flex-shrink:0;width:24px;height:24px;border-radius:8px;
+  border:1.5px solid var(--rule-strong);background:#fff;
+  display:flex;align-items:center;justify-content:center;
+  transition:all var(--t-fast);
+}
+.cl-check svg{width:14px;height:14px;opacity:0;color:#fff;transition:opacity var(--t-fast)}
+.cl-row[data-checked="true"] .cl-check{background:var(--sg-teal);border-color:var(--sg-teal);box-shadow:0 4px 12px -4px rgba(65,210,205,.55)}
+.cl-row[data-checked="true"] .cl-check svg{opacity:1}
+.cl-label{flex:1;font-size:14.5px;line-height:1.5;color:var(--ink);transition:color var(--t-fast);font-weight:500}
+.cl-row[data-checked="true"] .cl-label{color:var(--ink-mute);text-decoration:line-through;text-decoration-color:rgba(65,210,205,.4);font-weight:400}
+
+.cl-summary{
+  position:sticky;top:130px;
+  background:linear-gradient(160deg,var(--sg-blue),var(--sg-blue-deep));
+  color:#fff;
+  border-radius:var(--radius-lg);padding:var(--s-6);
+  box-shadow:var(--shadow-blue);
+  overflow:hidden;position:relative;
+}
+/* На мобильном / узком экране summary не липкая — она просто блок под чек-листом,
+   иначе sticky пытается прилипнуть и наезжает на следующую секцию. */
+@media (max-width:1000px){
+  .cl-summary{position:static;top:auto;padding:var(--s-5)}
+  .cl-progress-number{font-size:64px}
+}
+.cl-summary::before{
+  content:"";position:absolute;top:-30%;right:-30%;width:80%;height:120%;
+  background:radial-gradient(closest-side,rgba(65,210,205,.3),transparent 70%);
+  pointer-events:none;
+}
+.cl-summary > *{position:relative;z-index:1}
+.cl-progress-label{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.7);font-weight:700;margin-bottom:var(--s-3)}
+.cl-progress-number{
+  font-family:var(--font-display);font-size:80px;font-weight:300;
+  color:#fff;line-height:1;letter-spacing:-.04em;
+  display:flex;align-items:baseline;gap:8px;
+}
+.cl-progress-number span:last-child{font-size:.32em;color:rgba(255,255,255,.6);font-weight:400}
+.cl-progress-text{font-size:13.5px;color:rgba(255,255,255,.85);margin-top:var(--s-3);line-height:1.55;font-weight:400}
+.cl-bar{
+  width:100%;height:6px;background:rgba(255,255,255,.18);border-radius:var(--radius-pill);overflow:hidden;
+  margin:var(--s-4) 0 var(--s-3);
+}
+.cl-bar-fill{
+  height:100%;background:linear-gradient(90deg,var(--sg-teal),#fff);
+  border-radius:var(--radius-pill);width:0;
+  transition:width var(--t-slow);
+  box-shadow:0 0 12px rgba(255,255,255,.4);
+}
+.cl-status{
+  font-family:var(--font-display);font-size:18px;color:#fff;font-weight:700;letter-spacing:-.01em;
+  margin-top:var(--s-3);padding-top:var(--s-3);border-top:1px solid rgba(255,255,255,.18);
+}
+
+/* ============================================================
+   QUIZ
+   ============================================================ */
+.quiz{
+  background:#fff;border:1px solid var(--rule);
+  border-radius:var(--radius-xl);
+  padding:clamp(24px,4vw,52px);
+  margin-top:var(--s-6);
+  box-shadow:var(--shadow-2);
+}
+.quiz-progress{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:var(--s-5);
+}
+.quiz-progress-text{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--sg-blue);font-weight:700}
+.quiz-dots{display:flex;gap:7px}
+.quiz-dot{width:10px;height:10px;border-radius:50%;background:var(--rule-strong);transition:all var(--t-fast)}
+.quiz-dot[data-state="active"]{background:var(--sg-blue);transform:scale(1.3)}
+.quiz-dot[data-state="correct"]{background:var(--sg-teal)}
+.quiz-dot[data-state="wrong"]{background:var(--sg-violet)}
+
+.quiz-question{
+  font-family:var(--font-display);font-size:clamp(22px,2.8vw,32px);font-weight:800;
+  line-height:1.25;letter-spacing:-.025em;margin-bottom:var(--s-5);max-width:820px;
+}
+.quiz-options{display:grid;gap:var(--s-3);margin-bottom:var(--s-4)}
+.quiz-opt{
+  display:flex;align-items:flex-start;gap:var(--s-3);
+  padding:var(--s-4) var(--s-5);
+  border:1.5px solid var(--rule);border-radius:var(--radius);
+  background:#fff;
+  text-align:left;font-size:14.5px;line-height:1.5;color:var(--ink);font-weight:500;
+  cursor:pointer;
+  transition:all var(--t-fast);
+  width:100%;
+  min-height:60px;
+}
+.quiz-opt:hover{border-color:var(--sg-blue);background:var(--sg-blue-pale);transform:translateX(4px)}
+.quiz-opt-mark{
+  flex-shrink:0;width:28px;height:28px;border-radius:50%;
+  border:1.5px solid var(--rule-strong);background:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-mono);font-size:12px;font-weight:700;color:var(--ink-mute);
+  transition:all var(--t-fast);
+}
+.quiz-opt:hover .quiz-opt-mark{border-color:var(--sg-blue);color:var(--sg-blue)}
+.quiz-opt[data-result="correct"]{border-color:var(--sg-teal);background:var(--sg-teal-soft)}
+.quiz-opt[data-result="correct"] .quiz-opt-mark{background:var(--sg-teal);border-color:var(--sg-teal);color:#fff}
+.quiz-opt[data-result="wrong"]{border-color:var(--sg-violet);background:var(--sg-violet-soft)}
+.quiz-opt[data-result="wrong"] .quiz-opt-mark{background:var(--sg-violet);border-color:var(--sg-violet);color:#fff}
+.quiz-opt[disabled]{cursor:default;transform:none}
+
+.quiz-explain{
+  display:none;
+  margin-top:var(--s-4);padding:var(--s-5);
+  background:var(--sg-blue-pale);
+  border-left:4px solid var(--sg-blue);
+  border-radius:var(--radius);
+  font-size:14.5px;line-height:1.65;color:var(--ink-soft);font-weight:400;
+}
+.quiz-explain.show{display:block;animation:fadeIn .3s ease}
+.quiz-explain b{color:var(--ink);display:block;margin-bottom:8px;font-family:var(--font-display);font-size:15px;font-weight:700}
+
+.quiz-next{
+  display:none;margin-top:var(--s-5);
+  padding:14px 26px;border-radius:var(--radius-pill);
+  background:var(--sg-blue);color:#fff;
+  font-size:14px;font-weight:700;letter-spacing:.01em;
+  align-items:center;gap:10px;min-height:46px;
+  box-shadow:var(--shadow-blue);
+  transition:all var(--t-fast);
+}
+.quiz-next.show{display:inline-flex}
+.quiz-next:hover{background:var(--sg-light-blue);transform:translateY(-1px)}
+
+.quiz-result{display:none}
+.quiz-result.show{display:block;animation:fadeIn .4s ease}
+.quiz-result-score{
+  font-family:var(--font-display);font-size:clamp(70px,10vw,130px);font-weight:300;
+  letter-spacing:-.05em;line-height:.9;display:flex;align-items:baseline;gap:8px;
+  margin-bottom:var(--s-4);color:var(--sg-blue);
+}
+.quiz-result-score span{font-size:.32em;color:var(--ink-faint);font-weight:400}
+.quiz-result h3{font-family:var(--font-display);font-size:28px;font-weight:800;margin-bottom:var(--s-3);letter-spacing:-.02em}
+.quiz-result p{font-size:15.5px;line-height:1.65;color:var(--ink-soft);max-width:640px;font-weight:400}
+.quiz-restart{margin-top:var(--s-4)}
+
+/* ============================================================
+   EXECUTIVE SUMMARY
+   ============================================================ */
+.exec{
+  background:linear-gradient(160deg,var(--sg-blue) 0%,var(--sg-blue-deep) 60%,#000a3d 100%);
+  color:#fff;
+  padding:var(--s-9) 0;position:relative;overflow:hidden;
+}
+.exec::before{
+  content:"";position:absolute;inset:0;
+  background:
+    radial-gradient(900px 500px at 85% 15%, rgba(65,210,205,.18), transparent 60%),
+    radial-gradient(700px 400px at 10% 85%, rgba(135,69,222,.22), transparent 60%);
+  pointer-events:none;
+}
+.exec .container{position:relative;z-index:1}
+.exec .eyebrow{color:var(--sg-teal)}
+.exec .eyebrow::before{background:var(--sg-teal)}
+.exec h2{color:#fff;font-weight:800;letter-spacing:-.025em}
+.exec-lede{font-size:clamp(17px,1.7vw,22px);color:rgba(255,255,255,.82);max-width:820px;line-height:1.55;margin-bottom:var(--s-7);font-weight:300}
+
+.exec-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:var(--s-4);
+  margin-bottom:var(--s-7);
+}
+@media (max-width:780px){.exec-grid{grid-template-columns:1fr}}
+.exec-card{
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:var(--radius-lg);
+  padding:var(--s-5) var(--s-6);
+  background:rgba(255,255,255,.05);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  transition:transform var(--t-fast),border-color var(--t-fast),background var(--t-fast);
+}
+.exec-card:hover{transform:translateY(-3px);border-color:rgba(65,210,205,.5);background:rgba(255,255,255,.08)}
+.exec-card h4{
+  font-family:var(--font-display);font-size:11px;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--sg-teal);font-weight:700;margin-bottom:var(--s-3);
+}
+.exec-card p{font-size:15px;line-height:1.6;color:rgba(255,255,255,.88);margin-bottom:0;font-weight:300}
+.exec-card p strong{color:#fff;font-weight:700}
+
+.exec-final{
+  border-top:1px solid rgba(255,255,255,.15);
+  padding-top:var(--s-6);
+}
+.exec-final-label{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--sg-teal);font-weight:700;margin-bottom:var(--s-4)}
+.exec-final-quote{
+  font-family:var(--font-display);font-style:normal;font-weight:300;
+  font-size:clamp(24px,3.6vw,42px);line-height:1.25;letter-spacing:-.02em;
+  color:#fff;max-width:1000px;
+}
+.exec-final-quote::before{content:"«";color:var(--sg-teal);margin-right:6px;font-size:1.2em;line-height:0}
+.exec-final-quote::after{content:"».";color:var(--sg-teal)}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer{
+  background:var(--surface);border-top:1px solid var(--rule);
+  padding:var(--s-7) 0 var(--s-6);font-size:13px;color:var(--ink-mute);
+}
+.footer-grid{
+  display:grid;grid-template-columns:2fr 1fr 1fr;gap:var(--s-5);
+  margin-bottom:var(--s-5);
+}
+@media (max-width:780px){.footer-grid{grid-template-columns:1fr;gap:var(--s-4)}}
+.footer-grid h5{font-family:var(--font-display);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink);margin-bottom:var(--s-3);font-weight:700}
+.footer-grid p{font-size:13px;line-height:1.6;color:var(--ink-soft);margin-bottom:6px;font-weight:400}
+.footer-bottom{
+  display:flex;flex-wrap:wrap;justify-content:space-between;gap:var(--s-3);
+  padding-top:var(--s-4);border-top:1px solid var(--rule);
+  font-size:12px;color:var(--ink-mute);font-weight:500;
+}
+.footer-bottom b{color:var(--sg-blue);font-weight:700}
+
+/* ============================================================
+   UTILITIES
+   ============================================================ */
+.no-mobile{display:initial}
+@media (max-width:780px){.no-mobile{display:none}}
+.only-mobile{display:none}
+@media (max-width:780px){.only-mobile{display:initial}}
+
+/* Резервное место внизу страницы — чтобы mobnav не перекрывал контент */
+@media (max-width:640px){
+  footer{padding-bottom:calc(var(--s-7) + 72px)}
+}
+
+
+
+/* ============================================================
+   FIX 2026-05-22 — iOS / Android mobile reliability
+   Цель: одинаковая работа в Safari iOS, Chrome Android и мобильных preview.
+   ============================================================ */
+html, body{
+  width:100%;
+  max-width:100%;
+  overscroll-behavior-y:auto;
+}
+section, .hero, .snapshot, .parties, .risk, .exec{
+  scroll-margin-top:116px;
+}
+.btn, .crumb-btn, .mobnav-btn, .dispute-tab, .quiz-opt, .quiz-next,
+.tl-card, .ev-card, .risk-row, .cl-row, .party-node, .flow-line, .flow-hit{
+  -webkit-tap-highlight-color:rgba(0,38,186,.10);
+  touch-action:manipulation;
+  cursor:pointer;
+}
+.btn{ text-decoration:none; }
+@media (hover:none) and (pointer:coarse){
+  .tl-track{
+    grid-template-columns:1fr !important;
+    gap:0 !important;
+  }
+  .tl-track::before{
+    left:18px !important;right:auto !important;top:0 !important;bottom:0 !important;
+    width:1px !important;height:auto !important;
+    background:linear-gradient(180deg,var(--rule) 0%,var(--sg-light-blue) 50%,var(--sg-blue) 100%) !important;
+  }
+  .tl-item{padding:0 0 var(--s-4) var(--s-7) !important;}
+  .tl-dot{position:absolute !important;left:8px !important;top:6px !important;margin:0 !important;}
+  .dispute-controls{
+    overflow-x:auto;
+    flex-wrap:nowrap;
+    -webkit-overflow-scrolling:touch;
+    padding-bottom:8px;
+    margin-right:calc(-1 * clamp(20px,4vw,40px));
+    scroll-snap-type:x proximity;
+  }
+  .dispute-tab{
+    flex:0 0 auto;
+    scroll-snap-align:start;
+    min-height:42px;
+  }
+  .risk-meter,.cl-summary{position:static !important;top:auto !important;}
+}
+@media (max-width:640px), (hover:none) and (pointer:coarse){
+  body{font-size:15px;}
+  .container{padding-inline:18px;}
+  .topbar-inner{height:58px;gap:12px;}
+  .brand-mark{width:34px;height:34px;}
+  .brand small{font-size:9px;}
+  .brand b{font-size:14px;}
+  .crumb{top:58px;}
+  .progress{top:58px;}
+  .crumb-inner{height:42px;}
+  section{padding:30px 0 46px;scroll-margin-top:108px;}
+  .hero{
+    padding:28px 0 40px !important;
+    min-height:auto !important;
+    display:block !important;
+  }
+  .hero-grid{grid-template-columns:1fr !important;gap:24px !important;align-items:start !important;}
+  .hero-tag{font-size:10px;letter-spacing:.10em;margin-bottom:14px;padding:7px 12px;}
+  .hero h1{font-size:clamp(36px,11.2vw,48px) !important;line-height:1.04 !important;margin-bottom:14px !important;}
+  .hero-lede{font-size:15.5px !important;line-height:1.48 !important;margin-bottom:20px !important;}
+  .hero-actions{margin-bottom:20px !important;gap:10px;}
+  .btn{min-height:44px;padding:12px 18px;font-size:13px;}
+  .hero-meta{display:none;}
+  .hero-risk{padding:22px 20px !important;border-radius:22px;}
+  .hero-risk-label{font-size:10px;margin-bottom:12px !important;}
+  .hero-risk-amount{font-size:64px !important;}
+  .hero-risk-break{grid-template-columns:1fr 1fr;margin-top:16px !important;padding-top:14px !important;gap:10px;}
+  .hero-risk-break div b{font-size:21px !important;}
+  .hero-risk-thesis{margin-top:14px !important;padding:13px 15px !important;font-size:13px !important;line-height:1.42 !important;}
+  .snapshot-grid,.evidence-grid{grid-template-columns:1fr !important;}
+  .dispute-cols,.risk-wrap,.checklist-wrap,.parties-wrap{grid-template-columns:1fr !important;}
+  .quiz{padding:22px 14px;margin-top:22px;border-radius:22px;}
+  .quiz-progress{align-items:flex-start;gap:10px;}
+  .quiz-dots{gap:6px;flex-wrap:wrap;justify-content:flex-end;max-width:120px;}
+  .quiz-question{font-size:22px;line-height:1.28;margin-bottom:18px;}
+  .quiz-opt{padding:13px 12px;min-height:54px;font-size:13.5px;line-height:1.45;}
+  .quiz-opt:hover{transform:none;}
+  .quiz-next{width:100%;justify-content:center;}
+  .mobnav{bottom:calc(12px + env(safe-area-inset-bottom));}
+  footer{padding-bottom:calc(var(--s-7) + 92px + env(safe-area-inset-bottom));}
+}
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{
+    transition-duration:0.01ms !important;
+    animation-duration:0.01ms !important;
+    animation-iteration-count:1 !important;
+    scroll-behavior:auto !important;
+  }
+}
+
+@media print{
+  .topbar,.crumb,.mobnav,.sheet,.sheet-backdrop,.progress,.btn,.dispute-controls,.cl-summary,.risk-meter{display:none !important}
+  body{background:#fff;color:#000}
+  body::before{display:none}
+  section{padding:24px 0;page-break-inside:avoid}
+  .hero-risk{background:#fff;color:#000;border:1px solid #000;box-shadow:none}
+  .hero-risk *{color:#000 !important}
+  .exec{background:#fff;color:#000}
+  .exec *{color:#000 !important}
+  .cl-summary{background:#fff;color:#000;border:1px solid #000}
+}
+
+
+
+/* ============================================================
+   FIX 2026-05-22 — стартовый экран / HERO
+   Цель: убрать лишнюю пустоту сверху и не обрезать правую карточку
+   на стандартном первом экране 1366×768 под topbar + breadcrumb.
+   ============================================================ */
+@media (min-width:921px){
+  .hero{
+    padding:clamp(28px,4.2vh,48px) 0 clamp(28px,4vh,44px);
+    min-height:calc(100svh - 110px);
+    display:flex;
+    align-items:center;
+  }
+  .hero-grid{
+    grid-template-columns:minmax(0,1.28fr) minmax(380px,.72fr);
+    gap:clamp(32px,4vw,52px);
+    align-items:center;
+  }
+  .hero-tag{margin-bottom:clamp(14px,2vh,20px)}
+  .hero h1{
+    font-size:clamp(38px,4.7vw,60px);
+    line-height:1.02;
+    margin-bottom:clamp(16px,2.4vh,22px);
+  }
+  .hero-lede{
+    font-size:clamp(16px,1.35vw,18px);
+    line-height:1.45;
+    margin-bottom:clamp(18px,2.5vh,24px);
+    max-width:640px;
+  }
+  .hero-actions{margin-bottom:clamp(16px,2.4vh,22px)}
+  .hero-meta{padding-top:clamp(14px,2vh,18px);gap:var(--s-5)}
+  .hero-risk{padding:clamp(24px,2.6vw,34px)}
+  .hero-risk-label{margin-bottom:clamp(12px,1.8vh,16px)}
+  .hero-risk-amount{font-size:clamp(58px,7.1vw,96px)}
+  .hero-risk-break{
+    margin-top:clamp(16px,2.4vh,22px);
+    padding-top:clamp(14px,2.2vh,20px);
+  }
+  .hero-risk-break div b{font-size:clamp(21px,2vw,25px)}
+  .hero-risk-thesis{
+    margin-top:clamp(14px,2vh,18px);
+    padding:14px 18px;
+    font-size:13.5px;
+    line-height:1.45;
+  }
+}
+
+/* Дополнительное сжатие для невысоких экранов ноутбуков. */
+@media (min-width:921px) and (max-height:820px){
+  .hero{padding:24px 0 26px;min-height:calc(100svh - 110px)}
+  .hero h1{font-size:clamp(36px,4.3vw,56px);margin-bottom:14px}
+  .hero-tag{margin-bottom:14px;padding:7px 14px}
+  .hero-lede{font-size:16.5px;line-height:1.42;margin-bottom:16px}
+  .btn{padding:12px 20px;min-height:42px}
+  .hero-actions{margin-bottom:14px}
+  .hero-meta{padding-top:14px}
+  .hero-meta b{font-size:17px}
+  .hero-risk{padding:24px 28px}
+  .hero-risk-amount{font-size:clamp(56px,6.8vw,88px)}
+  .hero-risk-break{margin-top:14px;padding-top:14px}
+  .hero-risk-thesis{margin-top:14px;padding:12px 16px;font-size:13px;line-height:1.42}
+}
+
+
+
+/* Final tuning: hero starts closer to breadcrumb; no excessive vertical centering. */
+@media (min-width:921px){
+  .hero{min-height:0;display:block;padding:28px 0 38px}
+}
+@media (min-width:921px) and (max-height:820px){
+  .hero{min-height:0;display:block;padding:24px 0 30px}
+}
+
+
+/* ============================================================
+   iOS SAFARI — корректные тапы по всем интерактивам
+   На iOS Safari click-события на нестандартных элементах (div, g)
+   ненадёжны; поэтому есть touchend-обработчик. cursor:pointer всё равно
+   нужен, чтобы iOS вообще синтезировал click по таким элементам.
+   Добавляем единые правила для всех clickable, чтобы убрать 300мс
+   tap-delay и снять синюю tap-подсветку, мешающую дизайну.
+============================================================ */
+.tl-card,.ev-card,.risk-row,.cl-row,.dispute-tab,.quiz-opt,.quiz-next,
+.party-node,.flow-group,.flow-line,.flow-hit,
+.svg-zoom-btn,.sl-close,.sl-tab,
+.crumb-btn,.mobnav-btn,.sheet-list a,
+.btn,#riskAll,#riskReset,#quizRestart{
+  cursor:pointer;
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:rgba(0,0,0,0);
+}
+/* Сброс button-стилей браузера для div→button конверсий */
+button.tl-card,button.cl-row,button.risk-row{
+  background:inherit;
+  border:inherit;
+  color:inherit;
+  font:inherit;
+  text-align:inherit;
+  margin:0;
+  /* Сохраняем display из родительских стилей; убираем дефолтный button-сброс */
+  -webkit-appearance:none;
+  appearance:none;
+}
+/* tl-card имела свой padding/background — убедимся что button его наследует */
+button.tl-card{display:block;width:100%}
+button.cl-row{display:flex;width:100%}
+button.risk-row{display:flex;width:100%}
+/* Убираем неприятный focus-outline у тапнутых элементов на мобиле — оставляем только для keyboard */
+button.tl-card:focus:not(:focus-visible),
+button.cl-row:focus:not(:focus-visible),
+button.risk-row:focus:not(:focus-visible){outline:none}
+
+
+.tl-card,.ev-card,.risk-row,.cl-row,.dispute-tab,.quiz-opt,.quiz-next,.quiz-restart,
+.party-node,.flow-group,.flow-line,.flow-hit,.svg-zoom-btn,.sl-close,.sl-tab,
+.crumb-btn,.mobnav-btn,.sheet-list a,#sheetList a,.btn,
+#riskAll,#riskReset,#quizRestart,#quizNext,#svgZoomBtn,#slClose,
+#crumbHome,#crumbBack,#crumbFwd,#crumbMenu,
+#mobHome,#mobBack,#mobFwd,#mobMenu,#sheetBackdrop{
+  cursor:pointer !important;-webkit-tap-highlight-color:rgba(0,0,0,0);
+  touch-action:manipulation;-webkit-user-select:none;user-select:none}
+.party-node,.party-node *,.flow-group,.flow-group *,.flow-hit,.flow-line{
+  pointer-events:auto !important;cursor:pointer !important}
+.schema-lightbox:not([data-open="true"]),.sheet:not([data-open="true"]),
+.sheet-backdrop:not([data-open="true"]){pointer-events:none !important}
+</style>
+
+<style id="ios-safari-hardening-css">
+/* iOS/Safari hardening: real tap targets, no hidden controls, no accidental overlays */
+.tl-card,.ev-card,.risk-row,.cl-row,.dispute-tab,.quiz-opt,.quiz-next,#riskAll,#riskReset,#quizRestart,.svg-zoom-btn,.sl-close,.sl-tab,.party-node,.flow-group,.flow-line,.flow-hit{
+  -webkit-tap-highlight-color: rgba(0,38,186,.14);
+  touch-action: manipulation;
+  cursor: pointer;
+}
+.parties-svg-wrap{position:relative;}
+.svg-zoom-btn{display:inline-flex !important; visibility:visible !important; opacity:1 !important; z-index:10 !important;}
+@media (max-width: 760px){
+  .parties-svg-wrap{padding-top:58px !important;}
+  .svg-zoom-btn{top:14px !important; left:14px !important; height:36px !important; padding:0 14px !important; font-size:11px !important;}
+  .dispute-controls{display:flex !important; overflow-x:auto !important; -webkit-overflow-scrolling:touch !important; flex-wrap:nowrap !important; padding-bottom:8px !important;}
+  .dispute-tab{flex:0 0 auto !important;}
+  .quiz-opt{width:100%;}
+  .quiz-next.show{display:inline-flex !important;}
+}
+</style>
+</head>
+<body>
+<!-- Progressive-enhancement notice. The HTML shows it; the script right below
+     removes it the moment JavaScript runs. So it remains visible ONLY when the
+     file is opened in a context that does not execute JS — most often the iOS
+     Files-app "Quick Look" preview or a Mail/Messages attachment preview. In
+     that case the page renders but nothing is interactive, and this tells the
+     user how to open it properly. <noscript> covers browsers with JS disabled. -->
+<noscript><div style="position:fixed;top:0;left:0;right:0;z-index:99999;background:linear-gradient(135deg,#0026BA,#315DF6);color:#fff;padding:18px 20px;font:600 15px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;text-align:center">JavaScript отключён — включите его в настройках браузера, чтобы интерактив заработал.</div></noscript>
+<div id="iosHelpBanner" role="status" style="position:fixed;top:0;left:0;right:0;z-index:99999;background:linear-gradient(135deg,#0026BA,#315DF6);color:#fff;padding:18px 20px calc(18px + env(safe-area-inset-top));font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:15px;line-height:1.55;text-align:center;box-shadow:0 4px 20px rgba(0,0,0,.3)">
+  <div style="font-weight:700;font-size:17px;margin-bottom:6px">Откройте файл в браузере для интерактивных функций</div>
+  <div style="opacity:.92">На iPhone: <b>Поделиться</b> → <b>Открыть в Safari</b> (или в Chrome). В режиме предпросмотра файлов скрипты не выполняются.</div>
+</div>
+<script>(function(){var b=document.getElementById("iosHelpBanner");if(b&&b.parentNode){b.parentNode.removeChild(b);}})();</script>
+
+
+<!-- ============================================================
+     TOP NAV
+============================================================ -->
+<header class="topbar">
+  <div class="container topbar-inner">
+    <a href="#top" class="brand" aria-label="К началу страницы">
+      <span class="brand-mark" aria-hidden="true"><span></span></span>
+      <span>
+        <small>Tax Case Lab</small>
+        <b>А63-18337/2025</b>
+      </span>
+    </a>
+    <nav class="nav" aria-label="Разделы кейса">
+      <a href="#timeline">Таймлайн</a>
+      <a href="#parties">Участники</a>
+      <a href="#dispute">Позиции сторон</a>
+      <a href="#risk">Risk engine</a>
+      <a href="#evidence">Доказательства</a>
+      <a href="#checklist">Чек-лист</a>
+      <a href="#quiz">Тест</a>
+    </nav>
+  </div>
+</header>
+<div class="progress" aria-hidden="true"><div class="progress-bar" id="progressBar"></div></div>
+
+<!-- ============================================================
+     SECTION BREADCRUMB — Home / Назад / Вперёд + индикатор раздела
+============================================================ -->
+<div class="crumb" id="crumbBar">
+  <div class="container crumb-inner">
+    <button class="crumb-btn home" id="crumbHome" type="button" aria-label="На главную (вверх страницы)">
+      <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 7l6-5 6 5v7a1 1 0 0 1-1 1h-3v-5H6v5H3a1 1 0 0 1-1-1V7z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+      <span>На главную</span>
+    </button>
+    <button class="crumb-btn label-hide" id="crumbBack" type="button" aria-label="Предыдущий раздел">
+      <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>Назад</span>
+    </button>
+    <button class="crumb-btn label-hide" id="crumbFwd" type="button" aria-label="Следующий раздел">
+      <span>Вперёд</span>
+      <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+
+    <button class="crumb-menu-btn" id="crumbMenu" type="button" aria-label="Открыть список разделов">
+      <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 4h12M2 8h12M2 12h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+    </button>
+
+    <div class="crumb-current">
+      <span class="num" id="crumbNum">00</span>
+      <span class="title">
+        <span class="title-text" id="crumbTitle">Главная</span>
+      </span>
+      <span class="crumb-dots" id="crumbDots" aria-hidden="true"></span>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     MOBILE BOTTOM NAV — плавающая капсула на маленьких экранах
+============================================================ -->
+<nav class="mobnav" id="mobnav" aria-label="Быстрая навигация">
+  <button class="mobnav-btn primary" id="mobHome" type="button" aria-label="На главную">
+    <svg viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M2 8l7-6 7 6v8a1 1 0 0 1-1 1h-4v-6H7v6H3a1 1 0 0 1-1-1V8z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+  </button>
+  <button class="mobnav-btn" id="mobBack" type="button" aria-label="Предыдущий раздел">
+    <svg viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M11 4L6 9l5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+  <button class="mobnav-btn" id="mobMenu" type="button" aria-label="Открыть список разделов">
+    <svg viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 5h12M3 9h12M3 13h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+  </button>
+  <button class="mobnav-btn" id="mobFwd" type="button" aria-label="Следующий раздел">
+    <svg viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M7 4l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+</nav>
+
+<!-- Bottom-sheet с полным списком разделов -->
+<div class="sheet-backdrop" id="sheetBackdrop" aria-hidden="true"></div>
+<aside class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="Все разделы">
+  <div class="sheet-handle" aria-hidden="true"></div>
+  <h4>Перейти к разделу</h4>
+  <div class="sheet-list" id="sheetList"></div>
+</aside>
+
+<!-- ============================================================
+     SCHEMA LIGHTBOX — увеличенный fullscreen-просмотр карты потоков
+============================================================ -->
+<div class="schema-lightbox" id="schemaLightbox" role="dialog" aria-modal="true" aria-label="Развёрнутая схема участников и потоков">
+  <div class="sl-bar">
+    <h3>Карта участников и потоков · А63-18337/2025</h3>
+    <div class="sl-hint">Клик по узлу или линии → описание справа · Esc — закрыть</div>
+    <button class="sl-close" id="slClose" type="button" aria-label="Закрыть просмотр">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </div>
+  <div class="sl-body">
+    <div class="sl-svg-wrap" id="slSvgWrap"><!-- SVG будет клонирована JS -->
+    </div>
+    <aside class="sl-side" id="slSide">
+      <div class="sl-tabs" role="tablist" aria-label="Что выбрать">
+        <button class="sl-tab" data-tab="all" data-active="true" type="button">Обзор</button>
+        <button class="sl-tab" data-tab="parties" type="button">Участники</button>
+        <button class="sl-tab" data-tab="flows" type="button">Потоки</button>
+      </div>
+      <div id="slContent">
+        <div class="sl-detail-eyebrow">Карта дела</div>
+        <h3>5 участников, 6 линий обязательств</h3>
+        <p>Кликните по любому <strong>узлу</strong> (Губиев, Norwich, ЗАО «Туркомплекс», МИФНС, Суд) или <strong>линии</strong> между ними — здесь появится развёрнутое описание роли участника или природы потока.</p>
+        <p style="font-size:12.5px;color:var(--ink-mute)">Подсказка: тонкие пунктирные линии тоже кликабельны — над ними есть невидимая 14-пиксельная зона.</p>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<main id="top">
+
+<!-- ============================================================
+     HERO
+============================================================ -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-deco" aria-hidden="true">A63-18337/2025 · НАЛОГ У ИСТОЧНИКА · СТАВКА 15%</div>
+    <div class="hero-grid">
+      <div>
+        <div class="hero-tag">
+          <span class="dot" aria-hidden="true"></span>
+          Налог у источника · Контролируемая задолженность
+        </div>
+        <h1>Капитализация процентов как <em>налоговый триггер</em></h1>
+        <p class="hero-lede">
+          Российская компания не перевела за рубеж ни копейки процентов — и всё же
+          получила доначисление на сотни миллионов рублей. Разбираем дело,
+          в котором капитализация процентов в тело займа была признана
+          выплатой дохода иностранной компании в неденежной форме.
+        </p>
+        <div class="hero-actions">
+          <a href="#timeline" class="btn btn-primary" data-scroll-target="timeline">
+            Разобрать кейс
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10m0 0L8 3m4 4L8 11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="#exec" class="btn btn-ghost">Сразу к выводам</a>
+        </div>
+
+        <div class="hero-meta">
+          <div>
+            <b>А63-18337/2025</b>
+            <span>АС Ставропольского края · 18.05.2026</span>
+          </div>
+          <div>
+            <b>2021</b>
+            <span>Проверяемый период</span>
+          </div>
+          <div>
+            <b>БВО</b>
+            <span>Юрисдикция без СОИДН</span>
+          </div>
+          <div>
+            <b>Ст. 269 · 309 · 310</b>
+            <span>Ключевые нормы НК РФ</span>
+          </div>
+        </div>
+      </div>
+
+      <aside class="hero-risk" aria-label="Сумма налогового риска">
+        <div class="hero-risk-label">Совокупное обязательство по решению</div>
+        <div class="hero-risk-amount">
+          <em>206</em>
+          <span>млн ₽</span>
+        </div>
+        <div class="hero-risk-break">
+          <div>
+            <b>129,77 млн ₽</b>
+            <span>Налог у источника · 15%</span>
+          </div>
+          <div>
+            <b>76,29 млн ₽</b>
+            <span>Пени</span>
+          </div>
+        </div>
+        <div class="hero-risk-thesis">
+          <b>Главный тезис.</b> Отсутствие денежного платежа за рубеж само по себе
+          не защищает от налога у источника, если иностранный кредитор
+          получает доход в иной форме.
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SNAPSHOT — ключевые факты
+============================================================ -->
+<section class="snapshot" aria-label="Ключевые факты по кейсу">
+  <div class="container snapshot-grid">
+    <div class="snap">
+      <div class="snap-k">Заёмщик</div>
+      <div class="snap-v">ЗАО «Туркомплекс „Бештау"»</div>
+      <div class="snap-sub">Российское АО, г. Пятигорск. Отрицательный собственный капитал 2019–2021.</div>
+    </div>
+    <div class="snap">
+      <div class="snap-k">Займодавец</div>
+      <div class="snap-v">Norwich Investment & Finance S.A.</div>
+      <div class="snap-sub">100% акционер заёмщика. Юрисдикция — Британские Виргинские острова.</div>
+    </div>
+    <div class="snap">
+      <div class="snap-k">Капитализированная сумма</div>
+      <div class="snap-v is-num">11,89 млн $</div>
+      <div class="snap-sub">≈ 865,12 млн ₽ по курсу ЦБ РФ на 30.09–01.10.2021. Семь договоров займа, 2007–2020.</div>
+    </div>
+    <div class="snap">
+      <div class="snap-k">Решение суда</div>
+      <div class="snap-v">В удовлетворении отказано</div>
+      <div class="snap-sub">Позиция инспекции и УФНС поддержана в полном объёме.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     TIMELINE
+============================================================ -->
+<section id="timeline">
+  <div class="container">
+    <div class="section-num">01 · Хронология</div>
+    <div class="eyebrow">Раздел 01 · Таймлайн</div>
+    <h2 class="section-title">От первого займа 2007 года до решения суда 18 мая 2026</h2>
+    <p class="section-lede">
+      Пять опорных точек: накопление процентов, остановка их начисления, перевод в тело долга,
+      проверка инспекции и итоговое решение арбитражного суда. Раскройте любую карточку,
+      чтобы увидеть юридический смысл события и риск для налогового агента.
+    </p>
+
+    <div class="tl-wrap">
+      <div class="tl-track" id="timelineTrack">
+        <!-- 1: 2007-2020 -->
+        <div class="tl-item" data-phase="setup">
+          <div class="tl-dot" aria-hidden="true"></div>
+          <div class="tl-year">2007 — 2020</div>
+          <button type="button" class="tl-card" tabindex="0" role="button" aria-expanded="false">
+            <div class="tl-card-head">
+              <div>
+                <h3 class="tl-title">Семь договоров займа</h3>
+                <p class="tl-summary">Заёмщик регулярно привлекает финансирование от своего 100% участника на Британских Виргинских островах. Проценты начисляются, но фактически не выплачиваются.</p>
+              </div>
+              <span class="tl-card-toggle" aria-hidden="true">
+                <svg viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+              </span>
+            </div>
+            <div class="tl-detail">
+              <dl>
+                <div><dt>Факт</dt><dd>Договоры № 21, 129-3, 36-2011, 69-2014, 13-2019, 02-2020. Все валютные, в долларах США.</dd></div>
+                <div><dt>Налоговое значение</dt><dd>Norwich владеет <b>100% акций</b> заёмщика — задолженность изначально соответствует критериям <b>контролируемой</b> по подп. 1 п. 2 ст. 269 НК РФ.</dd></div>
+                <div><dt>Риск для налогового агента</dt><dd>Проценты по контролируемой задолженности подлежат «правилам недостаточной капитализации»: при отрицательном собственном капитале они в полном объёме приравниваются к дивидендам.</dd></div>
+                <div><dt>Вывод для бухгалтерской группы</dt><dd>На каждую отчётную дату фиксировать величину собственного капитала и состав начисленных, но не выплаченных процентов — это «спящий» риск, который может реализоваться при любом изменении обязательств.</dd></div>
+              </dl>
+            </div>
+          </button>
+        </div>
+
+        <!-- 2: 2021 — stop accrual -->
+        <div class="tl-item" data-phase="setup">
+          <div class="tl-dot" aria-hidden="true"></div>
+          <div class="tl-year">Май — июль 2021</div>
+          <button type="button" class="tl-card" tabindex="0" role="button" aria-expanded="false">
+            <div class="tl-card-head">
+              <div>
+                <h3 class="tl-title">Остановка начисления процентов</h3>
+                <p class="tl-summary">Шесть дополнительных соглашений фиксируют сумму уже начисленных процентов и прекращают их дальнейшее начисление.</p>
+              </div>
+              <span class="tl-card-toggle" aria-hidden="true">
+                <svg viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+              </span>
+            </div>
+            <div class="tl-detail">
+              <dl>
+                <div><dt>Факт</dt><dd>Допсоглашения от 19.05.2021 и 26.07.2021. Дата прекращения начисления — 01.01.2020 для старых договоров и 01.01.2021 для договоров 2019–2020.</dd></div>
+                <div><dt>Налоговое значение</dt><dd>Само по себе прекращение начисления процентов не создаёт дохода — но фиксирует ту сумму, которая позднее будет «капитализирована».</dd></div>
+                <div><dt>Риск для налогового агента</dt><dd>На этом этапе ещё нет выплаты дохода, но появляется «накопленный» процентный остаток, который скоро станет объектом налогообложения.</dd></div>
+                <div><dt>Вывод для бухгалтерской группы</dt><dd>Если стороны хотят прекратить начисление процентов — нужно сразу планировать дальнейшие шаги. Допсоглашение об остановке начисления — это «прелюдия», а не финал реструктуризации.</dd></div>
+              </dl>
+            </div>
+          </button>
+        </div>
+
+        <!-- 3: Sept-Dec 2021 — capitalization -->
+        <div class="tl-item" data-phase="risk">
+          <div class="tl-dot" aria-hidden="true"></div>
+          <div class="tl-year">Сентябрь — декабрь 2021</div>
+          <button type="button" class="tl-card" tabindex="0" role="button" aria-expanded="false">
+            <div class="tl-card-head">
+              <div>
+                <h3 class="tl-title">Капитализация в тело долга</h3>
+                <p class="tl-summary">Накопленные проценты — 11,89 млн долл. США — присоединяются к сумме основного долга. Деньги за рубеж не уходят. Именно эта точка станет моментом «выплаты дохода».</p>
+              </div>
+              <span class="tl-card-toggle" aria-hidden="true">
+                <svg viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+              </span>
+            </div>
+            <div class="tl-detail">
+              <dl>
+                <div><dt>Факт</dt><dd>Допсоглашения от 01.12.2021 с датами перевода в основной долг 30.09.2021 и 01.10.2021. Курс ЦБ РФ — 72,7608 ₽ и 72,6642 ₽ за доллар. Увеличение обязательств — <b>865 123 099 ₽</b>.</dd></div>
+                <div><dt>Налоговое значение</dt><dd>Инспекция и суд квалифицируют присоединение процентов к основному долгу как <b>выплату дохода иностранной организации в неденежной форме</b> (подп. 3 п. 1, п. 3 ст. 309 и абз. 8 п. 1 ст. 310 НК РФ).</dd></div>
+                <div><dt>Риск для налогового агента</dt><dd>В момент капитализации возникает обязанность исчислить и удержать налог у источника. Поскольку проценты переквалифицированы в дивиденды, а СОИДН с БВО нет — ставка <b>15%</b>. Налог: <b>129 768 465 ₽</b>.</dd></div>
+                <div><dt>Вывод для бухгалтерской группы</dt><dd>Любая «капитализация», «новация» или «зачёт» процентного долга — это не нейтральная техническая операция, а возможный момент выплаты дохода. На эту дату нужно готовить расчёт налога и документы фактического получателя дохода.</dd></div>
+              </dl>
+            </div>
+          </button>
+        </div>
+
+        <!-- 4: 2022 — forgiveness -->
+        <div class="tl-item" data-phase="setup">
+          <div class="tl-dot" aria-hidden="true"></div>
+          <div class="tl-year">2022</div>
+          <button type="button" class="tl-card" tabindex="0" role="button" aria-expanded="false">
+            <div class="tl-card-head">
+              <div>
+                <h3 class="tl-title">Прощение долга</h3>
+                <p class="tl-summary">Иностранный займодавец прощает обществу всю задолженность. Компания позднее будет ссылаться на это как на доказательство отсутствия экономической выгоды у Norwich.</p>
+              </div>
+              <span class="tl-card-toggle" aria-hidden="true">
+                <svg viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+              </span>
+            </div>
+            <div class="tl-detail">
+              <dl>
+                <div><dt>Факт</dt><dd>Полное прекращение обязательств по договорам займа в 2022 году путём прощения долга со стороны Norwich.</dd></div>
+                <div><dt>Налоговое значение</dt><dd>Суд указал: прощение долга в 2022 году <b>не отменяет и не изменяет</b> налоговые последствия, возникшие в момент капитализации в 2021 году. Льгота по подп. 21.5 п. 1 ст. 251 НК РФ распространяется на отношения с 01.01.2022, но не касается уже состоявшейся выплаты дохода.</dd></div>
+                <div><dt>Риск для налогового агента</dt><dd>Последующее «закрытие» отношений с иностранным кредитором не убирает уже сформированную обязанность налогового агента за более ранний период.</dd></div>
+                <div><dt>Вывод для бухгалтерской группы</dt><dd>Прощение долга — не страховка. Если в более ранние периоды был факт капитализации или новации, налог у источника нужно был удержать тогда же.</dd></div>
+              </dl>
+            </div>
+          </button>
+        </div>
+
+        <!-- 5: 2024-2026 — audit + court -->
+        <div class="tl-item" data-phase="court">
+          <div class="tl-dot" aria-hidden="true"></div>
+          <div class="tl-year">2024 — 2026</div>
+          <button type="button" class="tl-card" tabindex="0" role="button" aria-expanded="false">
+            <div class="tl-card-head">
+              <div>
+                <h3 class="tl-title">Выездная проверка и суд</h3>
+                <p class="tl-summary">ВНП за 2021 год → акт от 26.11.2024 → решение инспекции от 19.05.2025 → УФНС от 24.07.2025 → решение АС Ставропольского края от 18.05.2026 в пользу налогового органа.</p>
+              </div>
+              <span class="tl-card-toggle" aria-hidden="true">
+                <svg viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+              </span>
+            </div>
+            <div class="tl-detail">
+              <dl>
+                <div><dt>Факт</dt><dd>Решение МИФНС № 15 по СК от 19.05.2025 № 1644 об отказе в привлечении к ответственности, но с доначислением налога. Требование от 02.08.2025 № 26465. Решение АС Ставропольского края от 18.05.2026 — в удовлетворении заявления отказать.</dd></div>
+                <div><dt>Налоговое значение</dt><dd>Суд подтвердил: капитализация процентов = выплата дохода в неденежной форме; правила ст. 269 НК РФ применены корректно; статус Губиева М.Ю. как фактического получателя дохода <b>документально не подтверждён</b> за период 2009–2021.</dd></div>
+                <div><dt>Риск для налогового агента</dt><dd>К доначислению добавляются пени, которые за многолетний период выросли почти до 60% от тела налога. Срок обжалования — месяц в апелляции, два месяца в кассации.</dd></div>
+                <div><dt>Вывод для бухгалтерской группы</dt><dd>Спор о статусе фактического получателя дохода выигрывается документами того же периода, что и выплата. Письма и инструкции, оформленные «постфактум» в 2022 году, судом не принимаются как доказательства событий 2021 года.</dd></div>
+              </dl>
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PARTIES MAP
+============================================================ -->
+<section id="parties" class="parties">
+  <div class="container">
+    <div class="section-num">02 · Карта участников</div>
+    <div class="eyebrow">Раздел 02 · Карта потоков</div>
+    <h2 class="section-title">Пять участников, шесть линий обязательств</h2>
+    <p class="section-lede">
+      Нажмите на любой узел, чтобы увидеть его роль в споре. Сплошные линии — реально
+      возникавшие обязательства; пунктир — потоки, которых, по позиции инспекции,
+      фактически не было.
+    </p>
+
+    <div class="parties-wrap">
+      <!-- SVG schema -->
+      <div class="parties-svg-wrap">
+        <button class="svg-zoom-btn" id="svgZoomBtn" type="button" aria-label="Развернуть схему">
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M3 3h4M3 3v4M13 3h-4M13 3v4M3 13h4M3 13v-4M13 13h-4M13 13v-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+          Развернуть
+        </button>
+        <svg class="parties-svg" viewBox="0 0 920 540" role="img" aria-label="Схема участников и потоков по делу А63-18337/2025">
+          <!-- Arrows: маркеры в фирменной палитре SCHNEIDER GROUP -->
+          <defs>
+            <marker id="arr-ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 z" fill="#0a1230"/>
+            </marker>
+            <marker id="arr-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 z" fill="#0026BA"/>
+            </marker>
+            <marker id="arr-light" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 z" fill="#315DF6"/>
+            </marker>
+            <marker id="arr-violet" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 z" fill="#8745DE"/>
+            </marker>
+            <marker id="arr-teal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 z" fill="#41D2CD"/>
+            </marker>
+          </defs>
+
+          <!-- Заголовки сторон -->
+          <text x="20" y="28" font-family="Montserrat, sans-serif" font-size="11.5" font-weight="500" fill="#6b7395" letter-spacing=".05em">Российская территория →</text>
+          <text x="900" y="28" font-family="Montserrat, sans-serif" font-size="11.5" font-weight="500" fill="#6b7395" letter-spacing=".05em" text-anchor="end">Британские Виргинские острова</text>
+
+          <!-- Граница -->
+          <line x1="410" y1="44" x2="410" y2="520" stroke="#c7cee6" stroke-width="1" stroke-dasharray="3 5"/>
+          <text x="410" y="56" font-family="JetBrains Mono, monospace" font-size="9.5" fill="#6b7395" text-anchor="middle" letter-spacing=".18em">ГРАНИЦА</text>
+
+          <!-- Бенефициар -->
+          <g class="party-node benef" data-party="benef" role="button" tabindex="0" aria-label="Бенефициар Губиев М.Ю.">
+            <circle cx="110" cy="120" r="48"/>
+            <text x="110" y="115" text-anchor="middle">Губиев М.Ю.</text>
+            <text x="110" y="135" text-anchor="middle" class="role">Бенефициар</text>
+          </g>
+
+          <!-- Российский заёмщик -->
+          <g class="party-node ru" data-party="ru" role="button" tabindex="0" aria-label="Российский заёмщик">
+            <rect x="40" y="240" width="280" height="92" rx="16"/>
+            <text x="180" y="275" text-anchor="middle">ЗАО «Туркомплекс „Бештау"»</text>
+            <text x="180" y="295" text-anchor="middle" class="role">Заёмщик · налоговый агент</text>
+            <text x="180" y="316" text-anchor="middle" font-family="Montserrat, sans-serif" font-size="11" font-weight="500" fill="#3a4364">собственный капитал &lt; 0</text>
+          </g>
+
+          <!-- Налоговый орган -->
+          <g class="party-node tax" data-party="tax" role="button" tabindex="0" aria-label="Налоговый орган">
+            <rect x="40" y="400" width="280" height="60" rx="14"/>
+            <text x="180" y="428" text-anchor="middle">МИФНС № 15 по СК</text>
+            <text x="180" y="446" text-anchor="middle" class="role">Налоговый орган</text>
+          </g>
+
+          <!-- Иностранный займодавец -->
+          <g class="party-node foreign" data-party="foreign" role="button" tabindex="0" aria-label="Иностранный займодавец">
+            <rect x="510" y="200" width="280" height="92" rx="16"/>
+            <text x="650" y="232" text-anchor="middle">Norwich Investment</text>
+            <text x="650" y="252" text-anchor="middle">and Finance S.A.</text>
+            <text x="650" y="275" text-anchor="middle" class="role">100% акционер · BVI</text>
+          </g>
+
+          <!-- Арбитражный суд -->
+          <g class="party-node court" data-party="court" role="button" tabindex="0" aria-label="Арбитражный суд">
+            <rect x="510" y="400" width="280" height="60" rx="14"/>
+            <text x="650" y="428" text-anchor="middle">АС Ставропольского края</text>
+            <text x="650" y="446" text-anchor="middle" class="role">Арбитражный суд</text>
+          </g>
+
+          <!-- ПОТОКИ — каждый кликабельный, привязан data-flow для интерактивности.
+               Использован паттерн: широкая невидимая обводка (flow-hit) поверх
+               видимой линии — даёт большую область клика для тонких пунктиров. -->
+
+          <!-- 1. Заём (Norwich → Туркомплекс) — basic blue -->
+          <g class="flow-group" data-flow="loan" role="button" tabindex="0" pointer-events="bounding-box" cursor="pointer" aria-label="Поток: Заём">
+            <path class="flow-line loan" pointer-events="stroke" d="M 510 245 C 430 225, 360 235, 320 268" marker-end="url(#arr-blue)"/>
+            <path class="flow-hit" pointer-events="all" d="M 510 245 C 430 225, 360 235, 320 268"></path>
+          </g>
+          <text class="flow-label" x="415" y="220" text-anchor="middle">Заём</text>
+
+          <!-- 2. Начисление % (Туркомплекс → Norwich, light-blue dashed) -->
+          <g class="flow-group" data-flow="interest" role="button" tabindex="0" pointer-events="bounding-box" cursor="pointer" aria-label="Поток: Начисление процентов">
+            <path class="flow-line interest" pointer-events="stroke" d="M 320 305 C 400 308, 450 290, 510 275" marker-end="url(#arr-light)"/>
+            <path class="flow-hit" pointer-events="all" d="M 320 305 C 400 308, 450 290, 510 275"></path>
+          </g>
+          <text class="flow-label" x="415" y="320" text-anchor="middle" fill="#315DF6">Начисление %</text>
+
+          <!-- 3. Капитализация (loop на стороне Norwich, фиолетовый) -->
+          <g class="flow-group" data-flow="capital" role="button" tabindex="0" pointer-events="bounding-box" cursor="pointer" aria-label="Поток: Капитализация">
+            <path class="flow-line capital" pointer-events="stroke" d="M 785 250 C 855 262, 880 240, 870 200 C 858 162, 815 162, 793 198" marker-end="url(#arr-violet)"/>
+            <path class="flow-hit" pointer-events="all" d="M 785 250 C 855 262, 880 240, 870 200 C 858 162, 815 162, 793 198"></path>
+          </g>
+          <text class="flow-label" x="848" y="312" text-anchor="middle" fill="#8745DE">Капитализация</text>
+          <text class="flow-label" x="848" y="328" text-anchor="middle" fill="#8745DE">в тело долга</text>
+
+          <!-- 4. «Финансирование» от бенефициара — спорный поток (teal dashed) -->
+          <g class="flow-group" data-flow="claim" role="button" tabindex="0" pointer-events="bounding-box" cursor="pointer" aria-label="Спорный поток: Финансирование Norwich бенефициаром">
+            <path class="flow-line claim" pointer-events="stroke" d="M 158 120 C 290 90, 430 90, 555 200" marker-end="url(#arr-teal)"/>
+            <path class="flow-hit" pointer-events="all" d="M 158 120 C 290 90, 430 90, 555 200"></path>
+          </g>
+          <text class="flow-label" x="355" y="92" text-anchor="middle" fill="#2bb0ab">«финансирование» (не доказано)</text>
+
+          <!-- 5. Доначисление (Налоговый орган → Заёмщик, violet dashed) -->
+          <g class="flow-group" data-flow="tax" role="button" tabindex="0" pointer-events="bounding-box" cursor="pointer" aria-label="Поток: Доначисление налога">
+            <path class="flow-line tax" pointer-events="stroke" d="M 180 400 L 180 332" marker-end="url(#arr-violet)"/>
+            <path class="flow-hit" pointer-events="all" d="M 180 400 L 180 332"></path>
+          </g>
+          <text class="flow-label" x="200" y="368" text-anchor="start" fill="#8745DE">Доначисление</text>
+          <text class="flow-label" x="200" y="382" text-anchor="start" fill="#8745DE">206 млн ₽</text>
+
+          <!-- 6. Суд поддерживает позицию инспекции -->
+          <g class="flow-group" data-flow="support" role="button" tabindex="0" pointer-events="bounding-box" cursor="pointer" aria-label="Поток: Поддержка позиции инспекции судом">
+            <path class="flow-line support" pointer-events="stroke" d="M 510 430 L 320 430" marker-end="url(#arr-ink)"/>
+            <path class="flow-hit" pointer-events="all" d="M 510 430 L 320 430"></path>
+          </g>
+          <text class="flow-label" x="415" y="420" text-anchor="middle">Поддержка позиции</text>
+
+          <!-- Подсказка -->
+          <text x="40" y="515" font-family="JetBrains Mono, monospace" font-size="9.5" fill="#6b7395" letter-spacing=".15em">КЛИКНИТЕ ПО УЗЛУ →</text>
+        </svg>
+      </div>
+
+      <!-- side details -->
+      <div class="parties-side">
+        <div class="parties-legend" aria-label="Условные обозначения">
+          <h4>Условные обозначения · 6 потоков на схеме</h4>
+          <div class="legend-row">
+            <span class="legend-line" aria-hidden="true"><svg viewBox="0 0 46 10" width="46" height="10"><line x1="2" y1="5" x2="44" y2="5" stroke="#0026BA" stroke-width="2" stroke-linecap="round"/></svg></span>
+            <span><b>Заём</b> — реальный денежный поток Norwich → ЗАО</span>
+          </div>
+          <div class="legend-row">
+            <span class="legend-line" aria-hidden="true"><svg viewBox="0 0 46 10" width="46" height="10"><line x1="2" y1="5" x2="44" y2="5" stroke="#315DF6" stroke-width="2" stroke-linecap="round" stroke-dasharray="6 4"/></svg></span>
+            <span><b>Начисление процентов</b> в учёте у ЗАО</span>
+          </div>
+          <div class="legend-row">
+            <span class="legend-line" aria-hidden="true"><svg viewBox="0 0 46 10" width="46" height="10"><line x1="2" y1="5" x2="44" y2="5" stroke="#8745DE" stroke-width="3" stroke-linecap="round"/></svg></span>
+            <span><b>Капитализация</b> = выплата (по версии налоговой)</span>
+          </div>
+          <div class="legend-row">
+            <span class="legend-line" aria-hidden="true"><svg viewBox="0 0 46 10" width="46" height="10"><line x1="2" y1="5" x2="44" y2="5" stroke="#41D2CD" stroke-width="2" stroke-linecap="round" stroke-dasharray="5 3"/></svg></span>
+            <span><b>«Финансирование»</b> бенефициаром Norwich (не доказано)</span>
+          </div>
+          <div class="legend-row">
+            <span class="legend-line" aria-hidden="true"><svg viewBox="0 0 46 10" width="46" height="10"><line x1="2" y1="5" x2="44" y2="5" stroke="#8745DE" stroke-width="2" stroke-linecap="round" stroke-dasharray="4 3"/></svg></span>
+            <span><b>Доначисление</b> МИФНС → ЗАО · 206 млн ₽</span>
+          </div>
+          <div class="legend-row">
+            <span class="legend-line" aria-hidden="true"><svg viewBox="0 0 46 10" width="46" height="10"><line x1="2" y1="5" x2="44" y2="5" stroke="#0a1230" stroke-width="2" stroke-linecap="round"/></svg></span>
+            <span><b>Поддержка позиции</b> судом</span>
+          </div>
+        </div>
+
+        <div class="party-detail" id="partyDetail" data-state="idle">
+          <div class="party-detail-eyebrow">Выберите участника</div>
+          <h3>Кто за что отвечает?</h3>
+          <p>Нажмите на любой блок на схеме — здесь появится описание роли участника, его аргументов и слабых мест в позиции по этому конкретному делу.</p>
+          <div class="pd-meta">
+            <span class="pd-tag">5 участников</span>
+            <span class="pd-tag">6 потоков</span>
+            <span class="pd-tag copper">1 спорная точка</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     DISPUTE MATRIX
+============================================================ -->
+<section id="dispute" class="dispute">
+  <div class="container">
+    <div class="section-num">03 · Матрица спора</div>
+    <div class="eyebrow">Раздел 03 · Позиции сторон</div>
+    <h2 class="section-title">Семь точек разногласий</h2>
+    <p class="section-lede">
+      В каждой строке — три позиции: налогоплательщика, налогового органа и суда. В правой колонке —
+      практический вывод, который можно унести в работу с любым подобным кейсом.
+    </p>
+
+    <div class="dispute-controls" role="tablist" aria-label="Темы спора" id="disputeTabs">
+      <button class="dispute-tab" role="tab" aria-selected="true" data-panel="d1"><span class="num">01</span>Была ли выплата</button>
+      <button class="dispute-tab" role="tab" aria-selected="false" data-panel="d2"><span class="num">02</span>Капитализация = выплата?</button>
+      <button class="dispute-tab" role="tab" aria-selected="false" data-panel="d3"><span class="num">03</span>Прощение долга</button>
+      <button class="dispute-tab" role="tab" aria-selected="false" data-panel="d4"><span class="num">04</span>Фактический получатель</button>
+      <button class="dispute-tab" role="tab" aria-selected="false" data-panel="d5"><span class="num">05</span>Контролируемая задолженность</button>
+      <button class="dispute-tab" role="tab" aria-selected="false" data-panel="d6"><span class="num">06</span>Ставка 15%</button>
+      <button class="dispute-tab" role="tab" aria-selected="false" data-panel="d7"><span class="num">07</span>СОИДН</button>
+    </div>
+
+    <!-- Panel 1 -->
+    <div class="dispute-panel" data-active="true" id="d1">
+      <h3 class="dispute-q">Имела ли место выплата дохода иностранной организации?</h3>
+      <div class="dispute-cols">
+        <div class="dispute-col taxpayer">
+          <div class="dispute-col-head"><h4>Налогоплательщик</h4><span class="verdict">Возражение</span></div>
+          <p>Денежных средств за рубеж <strong>не перечислялось</strong>. Если нет банковского платежа — нет и выплаты, а значит, нет ни дохода у Norwich, ни обязанности удержать налог у источника.</p>
+        </div>
+        <div class="dispute-col tax-authority">
+          <div class="dispute-col-head"><h4>Налоговый орган</h4><span class="verdict">Доначисление</span></div>
+          <p>Понятие «выплата» в ст. 287 и абз. 8 п. 1 ст. 310 НК РФ охватывает <strong>любую неденежную форму</strong> получения дохода. Деньги — не единственный способ исполнить обязательство в пользу иностранного лица.</p>
+        </div>
+        <div class="dispute-col court">
+          <div class="dispute-col-head"><h4>Суд</h4><span class="verdict">→ За инспекцию</span></div>
+          <p>Отождествление «выплаты» с банковским переводом противоречит ст. 41 НК РФ. Доход — это <strong>экономическая выгода в любой форме</strong>, в том числе путём погашения, зачёта, прощения или капитализации.</p>
+        </div>
+      </div>
+      <div class="takeaway">
+        <div class="takeaway-label">Практический вывод</div>
+        <p>«Денег нет — налога нет» давно не работает. Любая операция, в результате которой иностранный контрагент получает экономическую выгоду, — потенциальный момент возникновения обязанностей налогового агента.</p>
+      </div>
+    </div>
+
+    <!-- Panel 2 -->
+    <div class="dispute-panel" id="d2">
+      <h3 class="dispute-q">Является ли капитализация процентов в основной долг выплатой дохода?</h3>
+      <div class="dispute-cols">
+        <div class="dispute-col taxpayer">
+          <div class="dispute-col-head"><h4>Налогоплательщик</h4><span class="verdict">Возражение</span></div>
+          <p>Это <strong>новация</strong> по ст. 414 ГК РФ: первоначальное обязательство заменяется новым. Сумма требований к должнику осталась прежней — изменилась только её квалификация (из процентного долга в основной).</p>
+        </div>
+        <div class="dispute-col tax-authority">
+          <div class="dispute-col-head"><h4>Налоговый орган</h4><span class="verdict">Доначисление</span></div>
+          <p>В момент перевода процентов в тело долга они <strong>считаются выплаченными</strong> — займодавец получил процентный доход и одновременно предоставил «новый заём» на ту же сумму.</p>
+        </div>
+        <div class="dispute-col court">
+          <div class="dispute-col-head"><h4>Суд</h4><span class="verdict">→ За инспекцию</span></div>
+          <p>Гражданско-правовая квалификация операции (новация / зачёт / иное) <strong>не отменяет</strong> возникновения дохода и обязанности налогового агента. Позиция соответствует п. 14 Обзора ВС РФ от 12.07.2017 и определению ВС РФ от 30.09.2015 № 305-КГ15-11372.</p>
+        </div>
+      </div>
+      <div class="takeaway">
+        <div class="takeaway-label">Практический вывод</div>
+        <p>«Чистая бухгалтерская» перекидка процентов в основной долг — это налоговое событие. На дату капитализации нужно делать расчёт налога, оформлять платёжку и решать вопрос с фактическим получателем дохода.</p>
+      </div>
+    </div>
+
+    <!-- Panel 3 -->
+    <div class="dispute-panel" id="d3">
+      <h3 class="dispute-q">Снимает ли риск последующее прощение долга в 2022 году?</h3>
+      <div class="dispute-cols">
+        <div class="dispute-col taxpayer">
+          <div class="dispute-col-head"><h4>Налогоплательщик</h4><span class="verdict">Возражение</span></div>
+          <p>В 2022 году долг был прощён — значит, Norwich <strong>фактически не получила</strong> экономической выгоды. Кроме того, по подп. 21.5 п. 1 ст. 251 НК РФ такие суммы не учитываются в налоговой базе.</p>
+        </div>
+        <div class="dispute-col tax-authority">
+          <div class="dispute-col-head"><h4>Налоговый орган</h4><span class="verdict">Доначисление</span></div>
+          <p>Прощение долга в 2022 году <strong>не отменяет</strong> налоговые последствия, возникшие в 2021-м. А подп. 21.5 п. 1 ст. 251 НК РФ распространяется на правоотношения с 01.01.2022.</p>
+        </div>
+        <div class="dispute-col court">
+          <div class="dispute-col-head"><h4>Суд</h4><span class="verdict">→ За инспекцию</span></div>
+          <p>Налоговая обязанность исчисляется на момент совершения операции. <strong>Последующие события не имеют ретроактивного эффекта</strong> в отношении уже возникшего объекта налогообложения.</p>
+        </div>
+      </div>
+      <div class="takeaway">
+        <div class="takeaway-label">Практический вывод</div>
+        <p>Если по сделке возник доход иностранного лица — момент выплаты «закрепляется» сразу. Любые дальнейшие действия (прощение долга, ликвидация займодавца, переуступка) уже не помогут снять налог за более ранний период.</p>
+      </div>
+    </div>
+
+    <!-- Panel 4 -->
+    <div class="dispute-panel" id="d4">
+      <h3 class="dispute-q">Кто фактический получатель дохода — Norwich или российский бенефициар?</h3>
+      <div class="dispute-cols">
+        <div class="dispute-col taxpayer">
+          <div class="dispute-col-head"><h4>Налогоплательщик</h4><span class="verdict">Возражение</span></div>
+          <p>Фактический получатель дохода — российский гражданин <strong>Губиев М.Ю.</strong>: он финансировал Norwich, давал инструкции по сделкам, контролировал движение средств. По п. 4 ст. 7 НК РФ налог должен платиться им, а не удерживаться у источника.</p>
+        </div>
+        <div class="dispute-col tax-authority">
+          <div class="dispute-col-head"><h4>Налоговый орган</h4><span class="verdict">Доначисление</span></div>
+          <p>Документально <strong>не подтверждено</strong> финансирование Norwich за счёт средств бенефициара. Договоры есть, но нет ни платёжных документов, ни документов о возврате; в датах и суммах — противоречия.</p>
+        </div>
+        <div class="dispute-col court">
+          <div class="dispute-col-head"><h4>Суд</h4><span class="verdict">→ За инспекцию</span></div>
+          <p>Понятия «бенефициарный собственник компании» и «фактический получатель дохода» <strong>не идентичны</strong>. Раскрытие КИК не доказывает право бенефициара самостоятельно распоряжаться доходом иностранной компании. Документы 2022 года не относятся к проверяемому периоду 2021.</p>
+        </div>
+      </div>
+      <div class="takeaway">
+        <div class="takeaway-label">Практический вывод</div>
+        <p>Применение концепции «сквозного подхода» требует доказательной базы того же периода: распоряжений, переписки, банковских документов, корпоративных решений. Письма-подтверждения, оформленные постфактум, суд не принимает.</p>
+      </div>
+    </div>
+
+    <!-- Panel 5 -->
+    <div class="dispute-panel" id="d5">
+      <h3 class="dispute-q">Корректно ли применены правила ст. 269 НК РФ о контролируемой задолженности?</h3>
+      <div class="dispute-cols">
+        <div class="dispute-col taxpayer">
+          <div class="dispute-col-head"><h4>Налогоплательщик</h4><span class="verdict">Возражение</span></div>
+          <p>Налоговый орган <strong>формально</strong> подошёл к вопросу — не выявил конечного бенефициарного владельца и не проанализировал каждую сделку отдельно. Norwich имеет «транзитный» характер.</p>
+        </div>
+        <div class="dispute-col tax-authority">
+          <div class="dispute-col-head"><h4>Налоговый орган</h4><span class="verdict">Доначисление</span></div>
+          <p>Задолженность отвечает критериям подп. 1 п. 2 ст. 269 НК РФ — Norwich владеет 100% акций общества. При отрицательном собственном капитале <strong>все проценты</strong> приравниваются к дивидендам.</p>
+        </div>
+        <div class="dispute-col court">
+          <div class="dispute-col-head"><h4>Суд</h4><span class="verdict">→ За инспекцию</span></div>
+          <p>Ст. 269 НК РФ <strong>не требует</strong> анализа всей цепочки собственников для установления резидентов РФ. Norwich действует более 20 лет, имеет финансовую отчётность и реальные внешнеэкономические договоры — её «транзитный» характер не доказан.</p>
+        </div>
+      </div>
+      <div class="takeaway">
+        <div class="takeaway-label">Практический вывод</div>
+        <p>Длительная и реальная деятельность иностранного займодавца — палка о двух концах. Она опровергает «технический» характер компании, но не помогает доказать «сквозной» подход в пользу налогоплательщика.</p>
+      </div>
+    </div>
+
+    <!-- Panel 6 -->
+    <div class="dispute-panel" id="d6">
+      <h3 class="dispute-q">Почему применяется именно ставка 15%, а не 20%?</h3>
+      <div class="dispute-cols">
+        <div class="dispute-col taxpayer">
+          <div class="dispute-col-head"><h4>Налогоплательщик</h4><span class="verdict">Возражение</span></div>
+          <p>В заявлении сама ставка отдельно не оспаривалась — основные доводы шли через отрицание факта выплаты и статуса фактического получателя дохода.</p>
+        </div>
+        <div class="dispute-col tax-authority">
+          <div class="dispute-col-head"><h4>Налоговый орган</h4><span class="verdict">Доначисление</span></div>
+          <p>Проценты по контролируемой задолженности <strong>переквалифицированы в дивиденды</strong> по правилам ст. 269 НК РФ. По п. 3 ст. 284 НК РФ дивиденды в пользу иностранной организации облагаются по ставке 15%.</p>
+        </div>
+        <div class="dispute-col court">
+          <div class="dispute-col-head"><h4>Суд</h4><span class="verdict">→ За инспекцию</span></div>
+          <p>Применение ставки 15% соответствует п. 3 ст. 284 НК РФ для дивидендов иностранной организации. Расчёт инспекции <strong>судом проверен</strong>; контррасчёт обществом не представлен.</p>
+        </div>
+      </div>
+      <div class="takeaway">
+        <div class="takeaway-label">Практический вывод</div>
+        <p>Главный «множитель риска» — это не сама ставка, а механизм переквалификации процентов в дивиденды. Именно он обнуляет процентные расходы и одновременно создаёт обязанность налогового агента.</p>
+      </div>
+    </div>
+
+    <!-- Panel 7 -->
+    <div class="dispute-panel" id="d7">
+      <h3 class="dispute-q">Почему не применимо соглашение об избежании двойного налогообложения?</h3>
+      <div class="dispute-cols">
+        <div class="dispute-col taxpayer">
+          <div class="dispute-col-head"><h4>Налогоплательщик</h4><span class="verdict">Возражение</span></div>
+          <p>Аргумент строился через «сквозной подход»: если фактический получатель — российский резидент, налог у источника удерживать не нужно вовсе (а не по сниженной ставке СОИДН).</p>
+        </div>
+        <div class="dispute-col tax-authority">
+          <div class="dispute-col-head"><h4>Налоговый орган</h4><span class="verdict">Доначисление</span></div>
+          <p>У Российской Федерации <strong>нет</strong> соглашения об избежании двойного налогообложения с Британскими Виргинскими островами. Поэтому при налогообложении дохода применяются положения НК РФ напрямую, без treaty relief.</p>
+        </div>
+        <div class="dispute-col court">
+          <div class="dispute-col-head"><h4>Суд</h4><span class="verdict">→ За инспекцию</span></div>
+          <p>Отсутствие СОИДН с БВО — установленный факт. По ст. 7, 310, 312 НК РФ льготных ставок применить нельзя. <strong>«Сквозной подход»</strong> заявителем документально не доказан.</p>
+        </div>
+      </div>
+      <div class="takeaway">
+        <div class="takeaway-label">Практический вывод</div>
+        <p>Структуры с займами из «безсоглашательных» юрисдикций (BVI, Belize, Сейшелы и пр.) при контролируемой задолженности — это всегда полная ставка по НК РФ. Релокация займодавца «через цепочку» не помогает, если бенефициарность не подтверждена документами.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     RISK ENGINE
+============================================================ -->
+<section id="risk">
+  <div class="container">
+    <div class="section-num">04 · Risk engine</div>
+    <div class="eyebrow">Раздел 04 · Логика налогового риска</div>
+    <h2 class="section-title">Шесть условий, которые включают «двигатель» налога у источника</h2>
+    <p class="section-lede">
+      Отметьте условия, которые присутствуют в вашей сделке. Шкала справа покажет уровень риска
+      и объяснит, какой именно фактор стал критическим. Это упрощённая, но показательная карта решений.
+    </p>
+
+    <div class="risk-wrap">
+      <div class="risk-conditions" id="riskConditions">
+        <h4>Условия сделки</h4>
+
+        <button type="button" class="risk-row" data-checked="false" data-weight="3" data-key="controlled" role="checkbox" tabindex="0" aria-checked="false">
+          <div class="risk-check" aria-hidden="true">
+            <svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3.5 3.5L12 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="risk-label">
+            <div class="risk-label-main">Задолженность является контролируемой по ст. 269 НК РФ</div>
+            <div class="risk-label-sub">Прямое или косвенное участие иностранного лица ≥ 25% либо иной квалифицирующий признак.</div>
+          </div>
+        </button>
+
+        <button type="button" class="risk-row" data-checked="false" data-weight="3" data-key="capital" role="checkbox" tabindex="0" aria-checked="false">
+          <div class="risk-check" aria-hidden="true">
+            <svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3.5 3.5L12 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="risk-label">
+            <div class="risk-label-main">Собственный капитал заёмщика отрицательный</div>
+            <div class="risk-label-sub">На отчётные даты соответствующего периода. В этом случае все проценты приравниваются к дивидендам.</div>
+          </div>
+        </button>
+
+        <button type="button" class="risk-row" data-checked="false" data-weight="3" data-key="capitalize" role="checkbox" tabindex="0" aria-checked="false">
+          <div class="risk-check" aria-hidden="true">
+            <svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3.5 3.5L12 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="risk-label">
+            <div class="risk-label-main">Проценты капитализируются в тело долга / новируются / зачитываются</div>
+            <div class="risk-label-sub">Любая операция, в результате которой иностранный кредитор получает экономическую выгоду без денежного платежа.</div>
+          </div>
+        </button>
+
+        <button type="button" class="risk-row" data-checked="false" data-weight="2" data-key="no-treaty" role="checkbox" tabindex="0" aria-checked="false">
+          <div class="risk-check" aria-hidden="true">
+            <svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3.5 3.5L12 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="risk-label">
+            <div class="risk-label-main">Юрисдикция займодавца — без действующего СОИДН с РФ</div>
+            <div class="risk-label-sub">BVI, Belize, Сейшелы, ряд других офшоров; либо страна с приостановленным/денонсированным соглашением.</div>
+          </div>
+        </button>
+
+        <button type="button" class="risk-row" data-checked="false" data-weight="2" data-key="no-fpd" role="checkbox" tabindex="0" aria-checked="false">
+          <div class="risk-check" aria-hidden="true">
+            <svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3.5 3.5L12 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="risk-label">
+            <div class="risk-label-main">Иной фактический получатель дохода документально не подтверждён</div>
+            <div class="risk-label-sub">Нет распоряжений, переписки, банковских документов за тот же период, что и выплата.</div>
+          </div>
+        </button>
+
+        <button type="button" class="risk-row" data-checked="false" data-weight="1" data-key="long-term" role="checkbox" tabindex="0" aria-checked="false">
+          <div class="risk-check" aria-hidden="true">
+            <svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3.5 3.5L12 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="risk-label">
+            <div class="risk-label-main">Проценты накапливались многолетне, без выплат</div>
+            <div class="risk-label-sub">«Спящий» процентный долг создаёт крупный разовый риск в момент любой реструктуризации.</div>
+          </div>
+        </button>
+      </div>
+
+      <aside class="risk-meter" aria-live="polite">
+        <h4>Уровень риска</h4>
+        <div class="risk-gauge">
+          <svg viewBox="0 0 200 120" preserveAspectRatio="xMidYMin meet">
+            <defs>
+              <!-- Полный градиент дуги: teal → light-blue → violet → blue -->
+              <linearGradient id="riskGrad" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%"   stop-color="#41D2CD"/>
+                <stop offset="35%"  stop-color="#315DF6"/>
+                <stop offset="70%"  stop-color="#8745DE"/>
+                <stop offset="100%" stop-color="#0026BA"/>
+              </linearGradient>
+              <filter id="riskGlow" x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur stdDeviation="2.4" result="blur"/>
+                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+            <!-- background arc (нейтральный фон) -->
+            <path class="risk-arc-bg" d="M 16 102 A 84 84 0 0 1 184 102"/>
+            <!-- active arc (заливка с градиентом, толщина та же) -->
+            <path id="riskArc" class="risk-arc" d="M 16 102 A 84 84 0 0 1 184 102"
+                  stroke="url(#riskGrad)"
+                  stroke-dasharray="264" stroke-dashoffset="264"/>
+            <!-- subtle tick marks: 5 точек по сегментам -->
+            <g class="risk-ticks">
+              <circle cx="16"  cy="102" r="2"/>
+              <circle cx="58"  cy="32"  r="2"/>
+              <circle cx="100" cy="18"  r="2"/>
+              <circle cx="142" cy="32"  r="2"/>
+              <circle cx="184" cy="102" r="2"/>
+            </g>
+          </svg>
+          <div class="risk-gauge-text">
+            <div class="risk-gauge-level" id="riskLevel">Low</div>
+            <div class="risk-gauge-label">Текущий уровень</div>
+          </div>
+        </div>
+
+        <div class="risk-explainer" id="riskExplain">
+          <b>Базовая позиция.</b> Ничего не отмечено — налог у источника не возникает.
+          По мере добавления условий шкала покажет, как сделка движется к ситуации
+          из дела А63-18337/2025.
+        </div>
+
+        <div class="risk-actions">
+          <button type="button" id="riskAll">Отметить всё</button>
+          <button type="button" id="riskReset">Сбросить</button>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     EVIDENCE LAB
+============================================================ -->
+<section id="evidence" style="background:var(--paper-deep);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)">
+  <div class="container">
+    <div class="section-num">05 · Лаборатория доказательств</div>
+    <div class="eyebrow">Раздел 05 · Почему доказательства не сработали</div>
+    <h2 class="section-title">Восемь точек, в которых позиция налогоплательщика «просела»</h2>
+    <p class="section-lede">
+      Главная битва шла за статус Norwich как фактического получателя дохода. Компания пыталась
+      доказать, что реальным владельцем процентного дохода был российский бенефициар, — но не
+      смогла. Раскройте карточки, чтобы увидеть, что именно нужно было собрать иначе.
+    </p>
+
+    <div class="evidence-grid" id="evidenceGrid">
+
+      <article class="ev-card" data-num="01" role="button" aria-expanded="false" tabindex="0">
+        <span class="ev-status">Не убедило суд</span>
+        <h4>Договоры между бенефициаром и Norwich</h4>
+        <p class="ev-card-summary">Три договора займа от Губиева М.Ю. в адрес Norwich на 5,5 млн $ — но без подтверждающих платёжных документов.</p>
+        <div class="ev-detail">
+          <div class="ev-detail-block">
+            <dt>Что представили</dt>
+            <dd>Договоры займа б/н от 28.08.2009, 31.03.2010, 15.06.2013 и скриншоты электронных писем в адрес кипрского банка.</dd>
+          </div>
+          <div class="ev-detail-block">
+            <dt>Почему этого оказалось недостаточно</dt>
+            <dd>В договорах — противоречия в суммах (500 000 / 1 000 000 USD по одному и тому же договору) и датах. Платёжных документов нет; нет и документов о возврате займов.</dd>
+          </div>
+          <div class="ev-detail-block fix">
+            <dt>Что усилило бы позицию</dt>
+            <dd>SWIFT-сообщения о переводе средств от Губиева в адрес Norwich, выписки по личному счёту бенефициара, входящие сообщения банка Кипра, корпоративная переписка о получении средств.</dd>
+          </div>
+        </div>
+      </article>
+
+      <article class="ev-card" data-num="02" role="button" aria-expanded="false" tabindex="0">
+        <span class="ev-status">Не убедило суд</span>
+        <h4>Инструкции и письма бенефициара</h4>
+        <p class="ev-card-summary">Письма-инструкции и confirmation об отсутствии фактического права на доход — но датированы 2022 годом.</p>
+        <div class="ev-detail">
+          <div class="ev-detail-block">
+            <dt>Что представили</dt>
+            <dd>Indemnity to Nominee Director от 18.08.2022; Corporate services agreement от 18.08.2022; письмо-инструкция от 25.11.2021 о новации; Confirmation от 31.12.2022.</dd>
+          </div>
+          <div class="ev-detail-block">
+            <dt>Почему этого оказалось недостаточно</dt>
+            <dd>Все ключевые документы оформлены <b>после</b> проверяемого периода 2021 года. Инструкция от 25.11.2021 касается только подписания допсоглашений и не доказывает контроль над компанией в целом.</dd>
+          </div>
+          <div class="ev-detail-block fix">
+            <dt>Что усилило бы позицию</dt>
+            <dd>Аналогичные документы за 2009–2021: оригинальные распоряжения, переписка с директорами, протоколы решений — оформленные в те же периоды, когда совершались операции.</dd>
+          </div>
+        </div>
+      </article>
+
+      <article class="ev-card" data-num="03" role="button" aria-expanded="false" tabindex="0">
+        <span class="ev-status">Не убедило суд</span>
+        <h4>Отсутствие распоряжений по текущей деятельности</h4>
+        <p class="ev-card-summary">Не представлены приказы о назначении должностных лиц Norwich, переписка с сотрудниками, операционные распоряжения за 2009–2021.</p>
+        <div class="ev-detail">
+          <div class="ev-detail-block">
+            <dt>Что представили</dt>
+            <dd>Точечные документы — Talean Services LTD, single-purpose инструкции, отдельные письма.</dd>
+          </div>
+          <div class="ev-detail-block">
+            <dt>Почему этого оказалось недостаточно</dt>
+            <dd>Концепция фактического получателя дохода требует доказательств систематического контроля. Точечные документы не закрывают вопрос о том, кто принимал текущие решения за все 12 лет существования отношений.</dd>
+          </div>
+          <div class="ev-detail-block fix">
+            <dt>Что усилило бы позицию</dt>
+            <dd>Архив корпоративных решений, протоколы советов директоров, переписка с administrators/officers компании, шаблоны mandates и powers of attorney за весь период.</dd>
+          </div>
+        </div>
+      </article>
+
+      <article class="ev-card" data-num="04" role="button" aria-expanded="false" tabindex="0">
+        <span class="ev-status">Не убедило суд</span>
+        <h4>Раскрытие КИК ≠ фактическое право на доход</h4>
+        <p class="ev-card-summary">Бенефициар отчитался как контролирующее лицо КИК — но это не доказывает, что он распоряжался конкретным доходом.</p>
+        <div class="ev-detail">
+          <div class="ev-detail-block">
+            <dt>Что представили</dt>
+            <dd>Документы о раскрытии Norwich как контролируемой иностранной компании Губиева М.Ю.</dd>
+          </div>
+          <div class="ev-detail-block">
+            <dt>Почему этого оказалось недостаточно</dt>
+            <dd>Суд прямо указал: понятия «бенефициарный собственник компании» и «фактический получатель дохода» не идентичны. Информация о КИК говорит об участии в капитале, но не о праве самостоятельно распоряжаться доходом.</dd>
+          </div>
+          <div class="ev-detail-block fix">
+            <dt>Что усилило бы позицию</dt>
+            <dd>Применительно к конкретной выплате — анализ функций и рисков по методичке Минфина / письма от 09.04.2021 № 03-08-05/26690; документы, фиксирующие распоряжение этим конкретным доходом.</dd>
+          </div>
+        </div>
+      </article>
+
+      <article class="ev-card" data-num="05" role="button" aria-expanded="false" tabindex="0">
+        <span class="ev-status">Не убедило суд</span>
+        <h4>«Транзитный» характер Norwich не подтверждён</h4>
+        <p class="ev-card-summary">Компания существует более 20 лет, имеет внешнеэкономические договоры, финансовую отчётность и реальные кредитные ведомости банковского контроля.</p>
+        <div class="ev-detail">
+          <div class="ev-detail-block">
+            <dt>Что представили</dt>
+            <dd>Аргумент о «транзитности» Norwich как технической прослойки в цепочке от бенефициара.</dd>
+          </div>
+          <div class="ev-detail-block">
+            <dt>Почему этого оказалось недостаточно</dt>
+            <dd>В материалах дела: длительная деятельность с 2007 года, активная финансовая отчётность 2021–2022, отсутствие нарушений валютного законодательства, аудиторские заключения. Парадокс: реальность Norwich играла <b>против</b> сквозного подхода.</dd>
+          </div>
+          <div class="ev-detail-block fix">
+            <dt>Что усилило бы позицию</dt>
+            <dd>Чёткое разделение: Norwich — реальная операционная компания, но <b>в части конкретной выплаты</b> процентного дохода действует как агент бенефициара. С детальным анализом mandate и flow of funds именно по этим суммам.</dd>
+          </div>
+        </div>
+      </article>
+
+      <article class="ev-card" data-num="06" role="button" aria-expanded="false" tabindex="0">
+        <span class="ev-status">Не убедило суд</span>
+        <h4>Аргумент о прощении долга</h4>
+        <p class="ev-card-summary">Ссылка на подп. 21.5 п. 1 ст. 251 НК РФ и фактическое неполучение выгоды — судом отклонена.</p>
+        <div class="ev-detail">
+          <div class="ev-detail-block">
+            <dt>Что представили</dt>
+            <dd>Указание на прощение долга в 2022 году и применимость льготы для аналогичных операций.</dd>
+          </div>
+          <div class="ev-detail-block">
+            <dt>Почему этого оказалось недостаточно</dt>
+            <dd>По п. 4 ст. 5 ФЗ от 26.03.2022 № 67-ФЗ норма распространяется на правоотношения с 01.01.2022. Капитализация была в 2021. Закрытие отношений ex post не отменяет уже совершённую выплату дохода.</dd>
+          </div>
+          <div class="ev-detail-block fix">
+            <dt>Что усилило бы позицию</dt>
+            <dd>Удерживать налог сразу в момент капитализации в 2021 году. Льгота 2022 года не предназначена для «лечения» более ранних рисков.</dd>
+          </div>
+        </div>
+      </article>
+
+      <article class="ev-card" data-num="07" role="button" aria-expanded="false" tabindex="0">
+        <span class="ev-status">Не убедило суд</span>
+        <h4>Аргумент о «структурном» изменении долга</h4>
+        <p class="ev-card-summary">Тезис о новации как простой замене квалификации требования без экономической выгоды.</p>
+        <div class="ev-detail">
+          <div class="ev-detail-block">
+            <dt>Что представили</dt>
+            <dd>Гражданско-правовой анализ: новация по ст. 414 ГК РФ как замена обязательства с сохранением суммы требования.</dd>
+          </div>
+          <div class="ev-detail-block">
+            <dt>Почему этого оказалось недостаточно</dt>
+            <dd>Суд сослался на п. 22 Постановления Пленума ВС РФ от 11.06.2020 № 6: соглашение, лишь уточняющее размер долга, не является новацией. Налоговые последствия не зависят от гражданско-правовой квалификации.</dd>
+          </div>
+          <div class="ev-detail-block fix">
+            <dt>Что усилило бы позицию</dt>
+            <dd>Чёткая экономическая аргументация о невозможности оценить выгоду по ст. 41 НК РФ — но в данном деле такой аргумент был блокирован самим фактом увеличения процентного потока в виде нового тела долга.</dd>
+          </div>
+        </div>
+      </article>
+
+      <article class="ev-card" data-num="08" role="button" aria-expanded="false" tabindex="0">
+        <span class="ev-status">Не убедило суд</span>
+        <h4>Исторический прецедент самого общества</h4>
+        <p class="ev-card-summary">В 2009 году ЗАО «Туркомплекс „Бештау"» при выплате процентов <b>самостоятельно</b> уплачивало налог на прибыль с доходов Norwich.</p>
+        <div class="ev-detail">
+          <div class="ev-detail-block">
+            <dt>Что нашла инспекция</dt>
+            <dd>Бухгалтерские справки № 00000025, 00000146, 00000080, 00000147 от 2009 года — общая сумма уплаченного налога ≈ 3,15 млн ₽ с процентов 12,6 млн ₽.</dd>
+          </div>
+          <div class="ev-detail-block">
+            <dt>Почему это сработало против общества</dt>
+            <dd>Собственная практика 2009 года показала: общество тогда квалифицировало Norwich именно как получателя дохода и платило налог. Аргумент о том, что Norwich «никогда не была реальным получателем», стал внутренне противоречивым.</dd>
+          </div>
+          <div class="ev-detail-block fix">
+            <dt>Что усилило бы позицию</dt>
+            <dd>Заранее заготовить объяснение этому факту: «обстоятельства существенно изменились между 2009 и 2021», с документальным подтверждением, что и было целью «сквозного подхода». В деле такого объяснения суд не увидел.</dd>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CHECKLIST
+============================================================ -->
+<section id="checklist">
+  <div class="container">
+    <div class="section-num">06 · Чек-лист</div>
+    <div class="eyebrow">Раздел 06 · Что проверить до операции</div>
+    <h2 class="section-title">Рабочий чек-лист бухгалтерской группы</h2>
+    <p class="section-lede">
+      Одиннадцать пунктов, которые нужно закрыть до любой реструктуризации внутригрупповой
+      задолженности — капитализации, новации, зачёта, прощения. Прогресс сохраняется в браузере:
+      можно вернуться позже.
+    </p>
+
+    <div class="checklist-wrap">
+      <div class="checklist">
+        <button type="button" class="cl-row" data-id="cl1" role="checkbox" tabindex="0" aria-checked="false">
+          <span class="cl-num">01</span>
+          <span class="cl-check" aria-hidden="true">
+            <svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3.5 3.5L12 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <div class="cl-label">Проверить, является ли задолженность контролируемой по ст. 269 НК РФ, на каждую отчётную дату</div>
+        </button>
+        <button type="button" class="cl-row" data-id="cl2" role="checkbox" tabindex="0" aria-checked="false">
+          <span class="cl-num">02</span>
+          <span class="cl-check" aria-hidden="true">
+            <svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3.5 3.5L12 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <div class="cl-label">Рассчитать последствия правил недостаточной капитализации с учётом фактической величины собственного капитала</div>
+        </button>
+        <button type="button" class="cl-row" data-id="cl3" role="checkbox" tabindex="0" aria-checked="false">
+          <span class="cl-num">03</span>
+          <span class="cl-check" aria-hidden="true">
+            <svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3.5 3.5L12 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <div class="cl-label">Оценить, возникает ли при операции доход иностранного лица в неденежной форме (новация / зачёт / капитализация / прощение)</div>
+        </button>
+        <button type="button" class="cl-row" data-id="cl4" role="checkbox" tabindex="0" aria-checked="false">
+          <span class="cl-num">04</span>
+          <span class="cl-check" aria-hidden="true">
+            <svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3.5 3.5L12 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <div class="cl-label">Определить статус российской компании как налогового агента по ст. 24 и 310 НК РФ применительно к операции</div>
+        </button>
+        <button type="button" class="cl-row" data-id="cl5" role="checkbox" tabindex="0" aria-checked="false">
+          <span class="cl-num">05</span>
+          <span class="cl-check" aria-hidden="true">
+            <svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3.5 3.5L12 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <div class="cl-label">Проверить наличие действующего СОИДН с юрисдикцией займодавца и условия применения льготных ставок</div>
+        </button>
+        <button type="button" class="cl-row" data-id="cl6" role="checkbox" tabindex="0" aria-checked="false">
+          <span class="cl-num">06</span>
+          <span class="cl-check" aria-hidden="true">
+            <svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3.5 3.5L12 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <div class="cl-label">Подтвердить фактическое право на доход именно в отношении этой выплаты (по группе выплат) — документами того же периода</div>
+        </button>
+        <button type="button" class="cl-row" data-id="cl7" role="checkbox" tabindex="0" aria-checked="false">
+          <span class="cl-num">07</span>
+          <span class="cl-check" aria-hidden="true">
+            <svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3.5 3.5L12 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <div class="cl-label">Собрать платёжные и корпоративные документы по всей цепочке финансирования — без расхождений в датах и суммах</div>
+        </button>
+        <button type="button" class="cl-row" data-id="cl8" role="checkbox" tabindex="0" aria-checked="false">
+          <span class="cl-num">08</span>
+          <span class="cl-check" aria-hidden="true">
+            <svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3.5 3.5L12 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <div class="cl-label">Синхронизировать даты допсоглашений, бухгалтерских справок, расчётов и платежей налога у источника</div>
+        </button>
+        <button type="button" class="cl-row" data-id="cl9" role="checkbox" tabindex="0" aria-checked="false">
+          <span class="cl-num">09</span>
+          <span class="cl-check" aria-hidden="true">
+            <svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3.5 3.5L12 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <div class="cl-label">Сверить КИК-уведомления и финансовую отчётность — раскрытие КИК не равно подтверждению фактического права на доход</div>
+        </button>
+        <button type="button" class="cl-row" data-id="cl10" role="checkbox" tabindex="0" aria-checked="false">
+          <span class="cl-num">10</span>
+          <span class="cl-check" aria-hidden="true">
+            <svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3.5 3.5L12 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <div class="cl-label">Оценить риски последующего прощения долга и убедиться, что льготы 2022 года не используются для «лечения» более ранних периодов</div>
+        </button>
+        <button type="button" class="cl-row" data-id="cl11" role="checkbox" tabindex="0" aria-checked="false">
+          <span class="cl-num">11</span>
+          <span class="cl-check" aria-hidden="true">
+            <svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3.5 3.5L12 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <div class="cl-label">Подготовить tax memo: позиция, расчёт, перечень собранных доказательств, остаточные риски и план их закрытия</div>
+        </button>
+      </div>
+
+      <aside class="cl-summary" aria-live="polite">
+        <div class="cl-progress-label">Готовность</div>
+        <div class="cl-progress-number"><span id="clDone">0</span> <span>/ 11</span></div>
+        <div class="cl-bar"><div class="cl-bar-fill" id="clBarFill"></div></div>
+        <div class="cl-progress-text" id="clText">
+          Начните с первого пункта. Каждый закрытый шаг снижает риск повторения сценария дела А63-18337/2025.
+        </div>
+        <div class="cl-status" id="clStatus">Готовности нет</div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     QUIZ
+============================================================ -->
+<section id="quiz">
+  <div class="container">
+    <div class="section-num">07 · Тест</div>
+    <div class="eyebrow">Раздел 07 · Самопроверка</div>
+    <h2 class="section-title">Семь вопросов, чтобы закрепить логику кейса</h2>
+    <p class="section-lede">
+      Один правильный ответ в каждом вопросе. После выбора появится короткое пояснение
+      со ссылкой на ключевую норму или вывод суда.
+    </p>
+
+    <div class="quiz" aria-live="polite">
+      <div class="quiz-progress">
+        <div class="quiz-progress-text" id="quizCounter">Вопрос 1 / 7</div>
+        <div class="quiz-dots" id="quizDots"></div>
+      </div>
+      <div id="quizStage">
+        <div class="quiz-question">Почему капитализация процентов в основной долг признана выплатой дохода иностранному кредитору, хотя денег он не получил?</div>
+        <div class="quiz-options quiz-fallback-options">
+          <div class="quiz-opt" role="text"><span class="quiz-opt-mark">A</span><span class="quiz-opt-text">Потому что это формальное требование ст. 287 НК РФ — любая операция по займу считается выплатой.</span></div>
+          <div class="quiz-opt" role="text"><span class="quiz-opt-mark">B</span><span class="quiz-opt-text">Потому что капитализация прекращает право требования по процентам и создаёт новое обязательство в большей сумме — возникает экономическая выгода кредитора.</span></div>
+          <div class="quiz-opt" role="text"><span class="quiz-opt-mark">C</span><span class="quiz-opt-text">Потому что фактический получатель дохода — российское физическое лицо.</span></div>
+          <div class="quiz-opt" role="text"><span class="quiz-opt-mark">D</span><span class="quiz-opt-text">Потому что любой валютный заём автоматически облагается налогом у источника.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     EXECUTIVE SUMMARY
+============================================================ -->
+<section id="exec" class="exec">
+  <div class="container">
+    <div class="eyebrow">Раздел 08 · Для финансового директора</div>
+    <h2 style="margin-bottom:var(--s-4)">Executive summary</h2>
+    <p class="exec-lede">
+      Кейс короткий по фактуре и длинный по последствиям. Ниже — то, что должен унести каждый
+      финансовый директор и руководитель бухгалтерской группы, столкнувшийся с внутригрупповыми
+      займами от иностранного участника.
+    </p>
+
+    <div class="exec-grid">
+      <div class="exec-card">
+        <h4>Что произошло</h4>
+        <p>Капитализация процентов по контролируемой задолженности перед иностранным участником из юрисдикции без СОИДН признана выплатой дохода в неденежной форме. Российская компания не удержала налог у источника — доначисление и пени превысили <strong>206 млн ₽</strong>.</p>
+      </div>
+      <div class="exec-card">
+        <h4>Почему риск материализовался</h4>
+        <p>Сошлись четыре фактора: контролируемая задолженность, отрицательный собственный капитал, неденежная форма «выплаты», отсутствие СОИДН. Каждый из них по отдельности — управляемый. Все вместе — критический риск.</p>
+      </div>
+      <div class="exec-card">
+        <h4>Где была ошибка</h4>
+        <p>Не было удержания налога в момент капитализации. Концепция «сквозного подхода» с российским бенефициаром выстраивалась после факта и подкреплялась документами 2022 года — за пределами проверяемого периода.</p>
+      </div>
+      <div class="exec-card">
+        <h4>Что делать в похожих ситуациях</h4>
+        <p>До любой реструктуризации внутригруппового долга — налоговый меморандум с расчётом, оценкой статуса фактического получателя дохода и сбором документов того же периода, что и операция. Не «потом», а <strong>заранее</strong>.</p>
+      </div>
+      <div class="exec-card">
+        <h4>Какие документы нужны заранее</h4>
+        <p>Mandates и powers of attorney, переписка о принятии решений, протоколы корпоративных органов, банковские выписки по цепочке финансирования — за весь период существования отношений с иностранным займодавцем, а не точечно.</p>
+      </div>
+      <div class="exec-card">
+        <h4>Что менять в текущей работе</h4>
+        <p>На каждую отчётную дату — формальный контроль критериев ст. 269 НК РФ и величины собственного капитала. Любая инициатива по реструктуризации валютного долга идёт через предварительное налоговое заключение.</p>
+      </div>
+    </div>
+
+    <div class="exec-final">
+      <div class="exec-final-label">Главный вывод</div>
+      <p class="exec-final-quote">
+        Налог у источника возникает в момент, когда иностранный кредитор получает экономическую
+        выгоду — даже если ни одной транзакции через банк не было
+      </p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h5>О материале</h5>
+        <p>Интерактивный разбор подготовлен по решению Арбитражного суда Ставропольского края от 18 мая 2026 года по делу № А63-18337/2025. Цели — обучение и внутренняя аналитика бухгалтерских групп.</p>
+        <p>Материал не является юридической консультацией. Для применения к конкретной операции необходим адаптированный анализ.</p>
+      </div>
+      <div>
+        <h5>Ключевые нормы</h5>
+        <p>Ст. 7 НК РФ — фактический получатель дохода</p>
+        <p>Ст. 41 НК РФ — понятие дохода</p>
+        <p>Ст. 269 НК РФ — контролируемая задолженность</p>
+        <p>Ст. 287, 309, 310, 312 НК РФ — налог у источника</p>
+      </div>
+      <div>
+        <h5>Опорная практика</h5>
+        <p>Определение ВС РФ от 30.09.2015 № 305-КГ15-11372</p>
+        <p>Обзор ВС РФ от 12.07.2017, п. 14</p>
+        <p>Постановление Пленума ВС РФ от 11.06.2020 № 6</p>
+        <p>Письма Минфина 24.05.2017, 19.10.2017, 09.04.2021</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>Tax Case Lab · А63-18337/2025 · Версия 1.0</div>
+      <div>Источник: картотека арбитражных дел</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ================================================================
+   TAX CASE LAB A63-18337/2025 — FULL JS (iOS-hardened)
+   ALL interactions via ONE delegated dispatcher: click + guarded touchend
+   + keyboard. No inline onclick. iOS ghost-clicks are suppressed.
+   ES3/ES5 only — no Array.from, no arrow functions, no const/let.
+   ================================================================ */
+
+/* Global error trap — shows a visible diagnostic on iOS if something breaks */
+window.onerror = function(msg, url, line) {
+  var d = document.createElement('div');
+  d.style.cssText = 'position:fixed;bottom:0;left:0;right:0;z-index:999999;background:#d32f2f;color:#fff;padding:12px;font:13px/1.4 monospace;max-height:40vh;overflow:auto';
+  d.textContent = 'JS Error: ' + msg + ' (line ' + line + ')';
+  document.body.appendChild(d);
+};
+
+/* ---------- UTILITY ---------- */
+function qs(sel, root) { return (root || document).querySelector(sel); }
+function qsa(sel, root) {
+  var list = (root || document).querySelectorAll(sel);
+  /* [].slice.call works everywhere including iOS 8+, unlike Array.from */
+  try { return [].slice.call(list); } catch(e) {
+    /* Fallback for very old engines where NodeList slice fails */
+    var arr = []; for (var i = 0; i < list.length; i++) arr.push(list[i]); return arr;
+  }
+}
+/* Polyfill: .closest() may not exist on SVG elements in older iOS WebKit */
+function closest(el, sel) {
+  if (!el) return null;
+  /* Native .closest — works on HTML elements in modern browsers */
+  if (el.closest) {
+    try { return el.closest(sel); } catch(e) { /* SVG might throw */ }
+  }
+  /* Manual walk up the DOM tree — works on ANY element including SVG <g>, <path> */
+  var node = el;
+  while (node && node.nodeType === 1) {
+    try {
+      if (node.matches && node.matches(sel)) return node;
+      if (node.msMatchesSelector && node.msMatchesSelector(sel)) return node;
+      if (node.webkitMatchesSelector && node.webkitMatchesSelector(sel)) return node;
+    } catch(e) {}
+    node = node.parentElement || node.parentNode;
+  }
+  return null;
+}
+
+/* Ghost-click suppression: after a tap is handled via touchend, the browser
+   fires a synthetic click ~300ms later at the same spot. We swallow exactly
+   that one synthetic click instead of using a blunt global time-window
+   (which would drop legitimate rapid taps on different controls). */
+var _suppressClickUntil = 0;
+function _suppressGhostClick() { _suppressClickUntil = Date.now() + 700; }
+function _isGhostClick() { return Date.now() < _suppressClickUntil; }
+
+/* ---------- PROGRESS BAR ---------- */
+(function initProgress() {
+  var bar = qs('#progressBar');
+  if (!bar) return;
+  window.addEventListener('scroll', function() {
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.width = (h > 0 ? (window.scrollY / h * 100) : 0) + '%';
+  }, { passive: true });
+})();
+
+/* ================================================================
+   DATA
+   ================================================================ */
+
+var PARTY_DATA = {
+  benef:   { eye: 'Российский бенефициар',     title: 'Губиев М.Ю.',
+             body: 'По версии налогоплательщика — фактический получатель дохода и реальный контролёр Norwich. Утверждалось, что бенефициар финансировал иностранную компанию собственными средствами и распоряжался её операциями.',
+             verdict: 'Слабое звено в позиции компании. Платёжных документов о финансировании Norwich нет, договоры содержат противоречия в датах и суммах, инструкции датированы 2022 годом.',
+             tags: ['Бенефициар','Не доказано ФПД','Нет документов 2009-2021'] },
+  ru:      { eye: 'Российский заёмщик',        title: 'ЗАО «Туркомплекс „Бештау"»',
+             body: 'Российское АО с отрицательным собственным капиталом за 2019-2021 годы. 100% акционер — на БВО. Привлекало процентные займы с 2007 года, проценты не выплачивались, в 2021 году капитализированы в тело долга.',
+             verdict: 'Признано налоговым агентом по операции капитализации. Доначисление налога 129,77 млн руб. и пени 76,29 млн руб.',
+             tags: ['Налоговый агент','Капитал < 0','Контролируемая задолженность'] },
+  foreign: { eye: 'Иностранный займодавец',    title: 'Norwich Investment & Finance S.A.',
+             body: 'Зарегистрирована на Британских Виргинских островах. 100% акционер заёмщика. По материалам дела — действующая компания с 20-летней историей, активными внешнеэкономическими договорами и финансовой отчётностью.',
+             verdict: 'Признана фактическим получателем дохода. Длительная реальная деятельность сыграла против сквозного подхода: «транзитность» компании не подтверждена.',
+             tags: ['BVI · нет СОИДН','100% акционер','Реальная деятельность'] },
+  tax:     { eye: 'Налоговый орган',           title: 'МИФНС № 15 по Ставропольскому краю',
+             body: 'Провела выездную проверку за 2021 год. Квалифицировала капитализацию как выплату дохода в неденежной форме; применила правила недостаточной капитализации; переквалифицировала проценты в дивиденды.',
+             verdict: 'Позиция полностью поддержана УФНС по СК и АС Ставропольского края.',
+             tags: ['Ст. 269+309+310 НК РФ','129,77 млн руб. налог','76,29 млн руб. пени'] },
+  court:   { eye: 'Арбитражный суд',           title: 'АС Ставропольского края',
+             body: 'Решение от 18 мая 2026 года по делу А63-18337/2025. Судья Навакова И.В. Отказ в удовлетворении заявления о признании недействительными решений инспекции и УФНС.',
+             verdict: 'Согласился с инспекцией по всем ключевым доводам.',
+             tags: ['Решение от 18.05.2026','Заявление отклонено','Возможна апелляция'] }
+};
+
+var FLOW_DATA = {
+  loan:     { eye: 'Поток 01', title: 'Заём от Norwich к ЗАО', body: 'Семь договоров займа 2007-2020 годов. Деньги действительно перечислялись.', verdict: 'Сам заём не создаёт налогооблагаемого события.' },
+  interest: { eye: 'Поток 02', title: 'Начисление процентов в учёте', body: 'Проценты ежемесячно начислялись, но не выплачивались. К 2021 году — 11,89 млн долл.', verdict: 'Невыплаченные проценты по контролируемой задолженности — спящий риск.' },
+  capital:  { eye: 'Поток 03 · триггер', title: 'Капитализация процентов в тело долга', body: 'В декабре 2021 года проценты присоединены к основному долгу. 865 123 099 руб.', verdict: 'Инспекция и суд квалифицировали как выплату дохода в неденежной форме. Налог 15% = 129,77 млн руб.' },
+  claim:    { eye: 'Поток 04 · спорный', title: '«Финансирование» Norwich бенефициаром', body: 'Версия компании: Губиев М.Ю. финансировал Norwich собственными средствами.', verdict: 'Суд не принял: нет платёжных документов, инструкции от 2022 года, противоречия.' },
+  tax:      { eye: 'Поток 05', title: 'Доначисление инспекции', body: 'Налог 129,77 млн руб. + пени 76,29 млн руб. = около 206 млн руб.', verdict: 'Поддержано УФНС и АС Ставропольского края.' },
+  support:  { eye: 'Поток 06', title: 'Суд поддержал инспекцию', body: 'Решение от 18.05.2026. Судья Навакова И.В.', verdict: 'В удовлетворении заявления отказано.' }
+};
+
+var QUIZ_DATA = [
+  { q: 'Почему капитализация процентов в основной долг признана выплатой дохода иностранному кредитору, хотя денег он не получил?',
+    correct: 1, opts: [
+      'Потому что это формальное требование ст. 287 НК РФ — любая операция по займу считается выплатой.',
+      'Потому что капитализация прекращает право требования по процентам и создаёт новое обязательство в большей сумме — это экономическая выгода кредитора по ст. 41 НК РФ.',
+      'Потому что фактический получатель дохода — российское физическое лицо, и доход возник у него.',
+      'Потому что займ был валютным — любая операция по валютному займу облагается налогом у источника.'
+    ], why: 'Суд исходил из того, что в момент капитализации проценты «трансформируются» в основной долг. По ст. 41 НК РФ это экономическая выгода, а абз. 8 п. 1 ст. 310 НК РФ прямо приравнивает к выплате доходы в неденежной форме.' },
+  { q: 'Почему последующее прощение долга в 2022 году не спасло компанию?',
+    correct: 1, opts: [
+      'Потому что прощение долга всегда облагается налогом отдельно.',
+      'Потому что обязанность налогового агента возникла в 2021 году в момент капитализации — прощение в другом периоде не отменяет этого.',
+      'Потому что прощение долга не относится к налоговым последствиям.',
+      'Потому что инспекция уже начала проверку.'
+    ], why: 'Каждая операция оценивается на момент её совершения. Капитализация 2021 — самостоятельный налоговый факт. Прощение 2022 — другая операция другого периода.' },
+  { q: 'Почему КИК-уведомления не подтвердили фактическое право на доход?',
+    correct: 2, opts: [
+      'Потому что КИК-уведомления не имеют юридической силы.',
+      'Потому что они подаются с задержкой.',
+      'Потому что раскрытие КИК подтверждает контроль, но не доказывает распоряжение конкретной выплатой.',
+      'Потому что КИК — инструмент деофшоризации, а не бенефициарного владения.'
+    ], why: 'КИК фиксирует контроль. Фактический получатель дохода (ст. 7 НК РФ) — про право распоряжаться доходом по конкретной выплате. Это разные правовые конструкции.' },
+  { q: 'Что нужно было собрать для «сквозного подхода»?',
+    correct: 2, opts: [
+      'Достаточно заявления бенефициара.',
+      'Достаточно КИК-уведомления.',
+      'Доказательства транзитности промежуточной компании и документы распоряжения доходом того же периода.',
+      'Достаточно уплаты НДФЛ бенефициаром.'
+    ], why: 'Сквозной подход требует: 1) доказать транзитность, 2) доказать реальное распоряжение доходом — документами того же периода.' },
+  { q: 'Почему ставка составила 15%?',
+    correct: 0, opts: [
+      'Потому что между РФ и БВО нет действующего СОИДН — льготная ставка не применяется.',
+      'Потому что СОИДН не применяется к контролируемой задолженности.',
+      'Потому что компания не подала заявление.',
+      'Потому что суд так решил.'
+    ], why: 'БВО не имеют СОИДН с Россией. Ставка 15% — по п. 3 ст. 284 НК РФ для дивидендов нерезидентам.' },
+  { q: 'Что должен сделать налоговый агент при неденежной выплате?',
+    correct: 2, opts: [
+      'Ничего — если денег нет, обязанности не возникает.',
+      'Только сообщить в инспекцию.',
+      'Исчислить налог, сообщить о невозможности удержания и координировать уплату.',
+      'Подать КИК-уведомление.'
+    ], why: 'Неденежная форма не отменяет обязанность налогового агента. См. абз. 8 п. 1 ст. 310 НК РФ.' },
+  { q: 'Почему отрицательный собственный капитал был критичен?',
+    correct: 2, opts: [
+      'Это признак банкротства.',
+      'Это делает сделку недействительной.',
+      'При отрицательном капитале правила недостаточной капитализации перекрывают проценты и приравнивают к дивидендам.',
+      'Он запрещает капитализацию процентов.'
+    ], why: 'Отрицательный капитал усиливает применение ст. 269 НК РФ: проценты полностью перекрываются и приравниваются к дивидендам.' }
+];
+
+/* ================================================================
+   HANDLERS — named functions called by the global dispatcher
+   ================================================================ */
+
+/* --- Timeline --- */
+function handleTimeline(card) {
+  var open = card.getAttribute('aria-expanded') === 'true';
+  card.setAttribute('aria-expanded', open ? 'false' : 'true');
+  var item = closest(card, '.tl-item');
+  if (item) {
+    if (open) item.classList.remove('is-active');
+    else item.classList.add('is-active');
+  }
+}
+
+/* --- Evidence --- */
+function handleEvidence(card) {
+  var open = card.getAttribute('aria-expanded') === 'true';
+  card.setAttribute('aria-expanded', open ? 'false' : 'true');
+}
+
+/* --- Dispute tabs --- */
+function handleDispute(tab) {
+  var panel = tab.getAttribute('data-panel');
+  if (!panel) return;
+  qsa('.dispute-tab').forEach(function(t) {
+    t.setAttribute('aria-selected', t === tab ? 'true' : 'false');
+    t.setAttribute('data-active', t === tab ? 'true' : 'false');
+  });
+  qsa('.dispute-panel').forEach(function(p) {
+    p.setAttribute('data-active', p.id === panel ? 'true' : 'false');
+  });
+}
+
+/* --- Risk Engine --- */
+var RISK_COLORS = { none: 'var(--ink-faint)', low: '#41D2CD', medium: '#315DF6', high: '#8745DE', critical: '#0026BA' };
+function handleRiskRow(row) {
+  var on = row.getAttribute('data-checked') === 'true';
+  row.setAttribute('data-checked', on ? 'false' : 'true');
+  row.setAttribute('aria-checked', on ? 'false' : 'true');
+  updateRisk();
+}
+function riskSetAll(checked) {
+  qsa('.risk-row').forEach(function(r) {
+    r.setAttribute('data-checked', checked ? 'true' : 'false');
+    r.setAttribute('aria-checked', checked ? 'true' : 'false');
+  });
+  updateRisk();
+}
+function riskExplainText(keys, score) {
+  var has = function(k) { return keys.indexOf(k) >= 0; };
+  if (!keys.length) return '<b>Базовая позиция.</b> Ничего не отмечено — налог у источника не возникает. По мере добавления условий шкала покажет, как сделка движется к ситуации из дела А63-18337/2025.';
+  if (has('controlled') && has('capital') && has('capitalize') && has('no-treaty') && has('no-fpd'))
+    return '<b>Критический риск.</b> Полный «коктейль» дела: контролируемая задолженность + отрицательный капитал + неденежная выплата + отсутствие СОИДН + недоказанный фактический получатель. Налог по ставке <b>15%</b> от полной суммы почти неизбежен.';
+  if (score >= 10) return '<b>Высокий риск.</b> Сошлись ключевые элементы. Нужен отдельный tax memo до операции.';
+  if (score >= 6) return '<b>Средний риск.</b> Несколько существенных признаков. Проверьте ст. 269, 309 и 310 НК РФ.';
+  return '<b>Низкий риск.</b> Отдельные признаки, но полной конструкции дела пока нет.';
+}
+function updateRisk() {
+  var rows = qsa('.risk-row'), score = 0, keys = [], max = 14;
+  rows.forEach(function(r) {
+    if (r.getAttribute('data-checked') === 'true') {
+      score += parseInt(r.getAttribute('data-weight') || '0', 10);
+      keys.push(r.getAttribute('data-key'));
+    }
+  });
+  var ratio = max > 0 ? score / max : 0;
+  var arc = qs('#riskArc');
+  if (arc) arc.setAttribute('stroke-dashoffset', String(264 - (264 * Math.min(ratio, 1))));
+  var lvl = 'Минимальный', color = RISK_COLORS.none;
+  if (ratio === 0)       { lvl = 'Минимальный'; color = RISK_COLORS.none; }
+  else if (ratio < 0.35) { lvl = 'Низкий';      color = RISK_COLORS.low; }
+  else if (ratio < 0.6)  { lvl = 'Средний';     color = RISK_COLORS.medium; }
+  else if (ratio < 0.85) { lvl = 'Высокий';     color = RISK_COLORS.high; }
+  else                   { lvl = 'Критический'; color = RISK_COLORS.critical; }
+  var level = qs('#riskLevel');
+  if (level) { level.textContent = lvl; level.style.color = color; }
+  var explain = qs('#riskExplain');
+  if (explain) explain.innerHTML = riskExplainText(keys, score);
+}
+
+/* --- Checklist --- */
+var CL_KEY = 'a63-18337-checklist-v1';
+function handleChecklist(row) {
+  var on = row.getAttribute('data-checked') === 'true';
+  row.setAttribute('data-checked', on ? 'false' : 'true');
+  row.setAttribute('aria-checked', on ? 'false' : 'true');
+  updateChecklist();
+}
+function updateChecklist() {
+  var rows = qsa('.cl-row'), done = 0, total = rows.length, state = {};
+  rows.forEach(function(r) {
+    var checked = r.getAttribute('data-checked') === 'true';
+    if (checked) done++;
+    state[r.getAttribute('data-id')] = checked;
+  });
+  try { localStorage.setItem(CL_KEY, JSON.stringify(state)); } catch(e) {}
+  var doneEl = qs('#clDone'); if (doneEl) doneEl.textContent = String(done);
+  var fill = qs('#clBarFill'); if (fill) fill.style.width = (total > 0 ? (done/total*100) : 0).toFixed(1) + '%';
+  var ratio = total > 0 ? done / total : 0;
+  var status = 'Готовности нет', text = 'Начните с первого пункта.';
+  if (ratio >= 1)       { status = 'Готовность 100%'; text = 'Все пункты закрыты. Сохраните набор документов как шаблон.'; }
+  else if (ratio >= 0.85) { status = 'Почти всё закрыто'; text = 'Финальный рывок: tax memo и сверка КИК.'; }
+  else if (ratio >= 0.6)  { status = 'Высокая готовность'; text = 'Осталась самая сложная зона — подтверждение фактического права на доход.'; }
+  else if (ratio >= 0.35) { status = 'Базовая готовность'; text = 'Закрыты ключевые расчётные пункты. Переходите к документальной части.'; }
+  else if (ratio > 0)     { status = 'В работе'; text = 'Хорошее начало. Сфокусируйтесь на контролируемой задолженности и собственном капитале.'; }
+  var statusEl = qs('#clStatus'); if (statusEl) statusEl.textContent = status;
+  var textEl = qs('#clText'); if (textEl) textEl.textContent = text;
+}
+
+/* --- Parties / Flows --- */
+function renderDetail(targetId, data) {
+  var el = document.getElementById(targetId);
+  if (!el || !data) return;
+  el.setAttribute('data-state', 'active');
+  var tags = (data.tags || []).map(function(t) { return '<span class="pd-tag">' + t + '</span>'; }).join('');
+  el.innerHTML = '<div class="party-detail-eyebrow">' + data.eye + '</div><h3>' + data.title + '</h3><p>' + data.body + '</p><p><strong>Итог по делу.</strong> ' + (data.verdict || '') + '</p><div class="pd-meta">' + tags + '</div>';
+}
+function handlePartyNode(node, insideLightbox) {
+  var key = node.getAttribute('data-party');
+  var root = insideLightbox ? qs('#schemaLightbox') : document;
+  qsa('.party-node', root).forEach(function(n) { n.setAttribute('data-active', n === node ? 'true' : 'false'); });
+  qsa('.flow-line', root).forEach(function(l) { l.removeAttribute('data-active'); });
+  renderDetail(insideLightbox ? 'slContent' : 'partyDetail', PARTY_DATA[key]);
+}
+function handleFlowGroup(g, insideLightbox) {
+  var key = g.getAttribute('data-flow');
+  var root = insideLightbox ? qs('#schemaLightbox') : document;
+  qsa('.party-node', root).forEach(function(n) { n.setAttribute('data-active', 'false'); });
+  qsa('.flow-line', root).forEach(function(l) { l.removeAttribute('data-active'); });
+  var line = g.querySelector('.flow-line');
+  if (line) line.setAttribute('data-active', 'true');
+  renderDetail(insideLightbox ? 'slContent' : 'partyDetail', FLOW_DATA[key]);
+}
+
+/* --- Schema Lightbox --- */
+function openLightbox() {
+  var lb = qs('#schemaLightbox'), wrap = qs('#slSvgWrap'), original = qs('.parties-svg');
+  if (!lb || !wrap || !original) return;
+  wrap.innerHTML = '';
+  var clone = original.cloneNode(true);
+  /* Clicks/taps inside the cloned SVG are handled by the global delegated
+     dispatcher, which detects the lightbox context automatically. */
+  wrap.appendChild(clone);
+  var sc = qs('#slContent');
+  if (sc) sc.innerHTML = '<div class="sl-detail-eyebrow">Карта дела</div><h3>5 участников, 6 линий обязательств</h3><p>Кликните по любому <strong>узлу</strong> или <strong>линии</strong> — справа появится описание.</p>';
+  lb.setAttribute('data-open', 'true');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  var lb = qs('#schemaLightbox');
+  if (lb) { lb.removeAttribute('data-open'); document.body.style.overflow = ''; }
+}
+
+/* --- Quiz --- */
+var quizState = { i: 0, answered: false, score: 0, answers: [] };
+function renderQuiz() {
+  var stage = qs('#quizStage'), counter = qs('#quizCounter'), dots = qs('#quizDots');
+  if (!stage) return;
+  var q = QUIZ_DATA[quizState.i], total = QUIZ_DATA.length;
+  if (counter) counter.textContent = 'Вопрос ' + (quizState.i + 1) + ' / ' + total;
+  if (dots) {
+    dots.innerHTML = '';
+    for (var d = 0; d < total; d++) {
+      var s = document.createElement('span');
+      s.className = 'quiz-dot';
+      if (quizState.answers[d] === true) s.setAttribute('data-state', 'correct');
+      else if (quizState.answers[d] === false) s.setAttribute('data-state', 'wrong');
+      else if (d === quizState.i) s.setAttribute('data-state', 'active');
+      dots.appendChild(s);
+    }
+  }
+  var html = '<div class="quiz-question">' + q.q + '</div><div class="quiz-options">';
+  for (var i = 0; i < q.opts.length; i++) {
+    html += '<button class="quiz-opt" data-idx="' + i + '" type="button">' +
+      '<span class="quiz-opt-mark">' + String.fromCharCode(65 + i) + '</span>' +
+      '<span class="quiz-opt-text">' + q.opts[i] + '</span></button>';
+  }
+  html += '</div><div class="quiz-explain" id="quizExplain"></div>';
+  html += '<button class="quiz-next" id="quizNext" type="button">' +
+    (quizState.i === total - 1 ? 'Посмотреть итог' : 'Следующий вопрос →') + '</button>';
+  stage.innerHTML = html;
+  quizState.answered = false;
+}
+function handleQuizOpt(btn) {
+  if (quizState.answered) return;
+  var q = QUIZ_DATA[quizState.i];
+  var idx = parseInt(btn.getAttribute('data-idx') || '0', 10);
+  var isCorrect = idx === q.correct;
+  quizState.answered = true;
+  quizState.answers[quizState.i] = isCorrect;
+  if (isCorrect) quizState.score++;
+  qsa('#quizStage .quiz-opt').forEach(function(b) {
+    b.disabled = true;
+    var bi = parseInt(b.getAttribute('data-idx') || '0', 10);
+    if (bi === q.correct) b.setAttribute('data-result', 'correct');
+    if (bi === idx && !isCorrect) b.setAttribute('data-result', 'wrong');
+  });
+  var ex = qs('#quizExplain');
+  if (ex) { ex.innerHTML = '<b>' + (isCorrect ? '✓ Верно' : '✗ Неверно') + '.</b> ' + q.why; ex.classList.add('show'); }
+  var next = qs('#quizNext');
+  if (next) next.classList.add('show');
+  /* Update dots only — full renderQuiz() would erase the answer state */
+  var dots = qs('#quizDots');
+  if (dots) {
+    dots.innerHTML = '';
+    for (var d = 0; d < QUIZ_DATA.length; d++) {
+      var s = document.createElement('span'); s.className = 'quiz-dot';
+      if (quizState.answers[d] === true) s.setAttribute('data-state', 'correct');
+      else if (quizState.answers[d] === false) s.setAttribute('data-state', 'wrong');
+      else if (d === quizState.i) s.setAttribute('data-state', 'active');
+      dots.appendChild(s);
+    }
+  }
+}
+function handleQuizNext() {
+  if (!quizState.answered) return;
+  if (quizState.i < QUIZ_DATA.length - 1) { quizState.i++; renderQuiz(); }
+  else renderQuizResult();
+}
+function renderQuizResult() {
+  var stage = qs('#quizStage'), counter = qs('#quizCounter');
+  if (!stage) return;
+  var total = QUIZ_DATA.length, score = quizState.score;
+  if (counter) counter.textContent = 'Итог · ' + score + ' / ' + total;
+  var verdict = score === total ? 'Полное понимание кейса' : score >= 5 ? 'Уверенное знание' : score >= 3 ? 'Базовое понимание' : 'Стоит вернуться к материалу';
+  stage.innerHTML = '<div class="quiz-result show"><div class="quiz-result-score">' + score + '<span> / ' + total + '</span></div><h3>' + verdict + '</h3><p>Правильных ответов: ' + score + ' из ' + total + '.</p><button class="quiz-restart quiz-next show" id="quizRestart" type="button">↺ Пройти заново</button></div>';
+}
+function quizRestart() {
+  quizState = { i: 0, answered: false, score: 0, answers: [] }; renderQuiz();
+}
+
+/* --- Navigation --- */
+var NAV_SECTIONS = [
+  { id: 'timeline',  num: '01', title: 'Хронология' },
+  { id: 'parties',   num: '02', title: 'Участники' },
+  { id: 'dispute',   num: '03', title: 'Матрица спора' },
+  { id: 'risk',      num: '04', title: 'Risk engine' },
+  { id: 'evidence',  num: '05', title: 'Доказательства' },
+  { id: 'checklist', num: '06', title: 'Чек-лист' },
+  { id: 'quiz',      num: '07', title: 'Тест' },
+  { id: 'exec',      num: '08', title: 'Executive summary' }
+];
+function getNavOffset() { return 110; }
+function getCurrentIdx() {
+  var y = window.scrollY + getNavOffset() + 40;
+  var idx = -1;
+  NAV_SECTIONS.forEach(function(s, i) {
+    var el = document.getElementById(s.id);
+    if (el && (el.getBoundingClientRect().top + window.scrollY) <= y) idx = i;
+  });
+  return idx;
+}
+function scrollToIdx(idx) {
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (idx < 0) { window.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' }); return; }
+  var s = NAV_SECTIONS[idx]; if (!s) return;
+  var el = document.getElementById(s.id); if (!el) return;
+  var top = el.getBoundingClientRect().top + window.scrollY - getNavOffset();
+  window.scrollTo({ top: Math.max(0, top), behavior: reduced ? 'auto' : 'smooth' });
+}
+function updateNavUI() {
+  var idx = getCurrentIdx();
+  var here = idx >= 0 ? NAV_SECTIONS[idx] : { num: '00', title: 'Главная' };
+  var numEl = qs('#crumbNum'); if (numEl) numEl.textContent = here.num;
+  var titleEl = qs('#crumbTitle'); if (titleEl) titleEl.textContent = here.title;
+  var dotsEl = qs('#crumbDots');
+  if (dotsEl) {
+    dotsEl.innerHTML = '';
+    NAV_SECTIONS.forEach(function(s, i) {
+      var d = document.createElement('span'); d.className = 'crumb-dot';
+      if (i === idx) d.setAttribute('data-active', 'true');
+      dotsEl.appendChild(d);
+    });
+  }
+  // Nav links highlight
+  qsa('nav.nav a[href^="#"]').forEach(function(l) {
+    l.removeAttribute('data-active');
+    var href = l.getAttribute('href');
+    if (idx >= 0 && href === '#' + NAV_SECTIONS[idx].id) l.setAttribute('data-active', 'true');
+  });
+}
+/* --- Sheet (section list) --- */
+function openSheet() {
+  var sheet = qs('#sheet'), backdrop = qs('#sheetBackdrop');
+  if (sheet) sheet.setAttribute('data-open', 'true');
+  if (backdrop) backdrop.setAttribute('data-open', 'true');
+  document.body.style.overflow = 'hidden';
+}
+function closeSheet() {
+  var sheet = qs('#sheet'), backdrop = qs('#sheetBackdrop');
+  if (sheet) sheet.removeAttribute('data-open');
+  if (backdrop) backdrop.removeAttribute('data-open');
+  document.body.style.overflow = '';
+}
+
+/* --- Smooth scroll for anchor links --- */
+function handleAnchorClick(link, e) {
+  var href = link.getAttribute('href');
+  if (!href || href === '#') return;
+  var id = decodeURIComponent(href.slice(1));
+  var el = document.getElementById(id);
+  if (!el) return;
+  e.preventDefault();
+  var top = el.getBoundingClientRect().top + window.scrollY - getNavOffset();
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  window.scrollTo({ top: Math.max(0, top), behavior: reduced ? 'auto' : 'smooth' });
+}
+
+/* ================================================================
+   GLOBAL EVENT DISPATCHER — iOS-compatible event delegation.
+   ONE handler on document in capture phase.
+   All interactions route through here.
+   ================================================================ */
+/* routeTap: the single source of truth for every interaction.
+   Receives the tapped element `t` and the originating event `e`
+   (a click OR a touchend). Returns true if it handled the target. */
+function routeTap(t, e) {
+  if (!t) return false;
+
+  /* --- Timeline --- */
+  var tlCard = closest(t, '.tl-card');
+  if (tlCard) { handleTimeline(tlCard); return true; }
+
+  /* --- Evidence --- */
+  var evCard = closest(t, '.ev-card');
+  if (evCard) { handleEvidence(evCard); return true; }
+
+  /* --- Risk Engine --- */
+  if (closest(t, '#riskAll')) { riskSetAll(true); return true; }
+  if (closest(t, '#riskReset')) { riskSetAll(false); return true; }
+  var riskRow = closest(t, '.risk-row');
+  if (riskRow) { handleRiskRow(riskRow); return true; }
+
+  /* --- Dispute tabs --- */
+  var dTab = closest(t, '.dispute-tab');
+  if (dTab) { handleDispute(dTab); return true; }
+
+  /* --- Checklist --- */
+  var clRow = closest(t, '.cl-row');
+  if (clRow) { handleChecklist(clRow); return true; }
+
+  /* --- Quiz --- */
+  if (closest(t, '#quizRestart')) { quizRestart(); return true; }
+  var qNext = closest(t, '.quiz-next');
+  if (qNext) { handleQuizNext(); return true; }
+  var qOpt = closest(t, '.quiz-opt');
+  if (qOpt) { handleQuizOpt(qOpt); return true; }
+
+  /* --- Schema Lightbox controls (checked before SVG nodes) --- */
+  if (closest(t, '#svgZoomBtn') || closest(t, '.svg-zoom-btn')) { openLightbox(); return true; }
+  if (closest(t, '#slClose') || closest(t, '.sl-close')) { closeLightbox(); return true; }
+  var slTab = closest(t, '.sl-tab');
+  if (slTab) {
+    qsa('.sl-tab').forEach(function(x) { x.removeAttribute('data-active'); });
+    slTab.setAttribute('data-active', 'true');
+    return true;
+  }
+
+  /* --- Parties (SVG <g>) --- */
+  var pNode = closest(t, '.party-node');
+  if (pNode) { handlePartyNode(pNode, !!closest(pNode, '.schema-lightbox')); return true; }
+
+  /* --- Flow groups (SVG): group, or its line / hit-area children --- */
+  var fGroup = closest(t, '.flow-group');
+  if (!fGroup) {
+    var fLine = closest(t, '.flow-line') || closest(t, '.flow-hit');
+    if (fLine) fGroup = closest(fLine, '.flow-group');
+  }
+  if (fGroup) { handleFlowGroup(fGroup, !!closest(fGroup, '.schema-lightbox')); return true; }
+
+  /* --- Lightbox backdrop tap closes it --- */
+  if (t === qs('#schemaLightbox')) { closeLightbox(); return true; }
+
+  /* --- Navigation: crumbs + mobnav --- */
+  if (closest(t, '#crumbHome') || closest(t, '#mobHome')) { scrollToIdx(-1); return true; }
+  if (closest(t, '#crumbBack') || closest(t, '#mobBack')) { scrollToIdx(Math.max(-1, getCurrentIdx() - 1)); return true; }
+  if (closest(t, '#crumbFwd') || closest(t, '#mobFwd')) { var ci = getCurrentIdx(); if (ci < NAV_SECTIONS.length - 1) scrollToIdx(ci + 1); return true; }
+  if (closest(t, '#crumbMenu') || closest(t, '#mobMenu')) { openSheet(); return true; }
+
+  /* --- Sheet --- */
+  if (t === qs('#sheetBackdrop') || closest(t, '#sheetBackdrop')) { closeSheet(); return true; }
+  var sheetLink = closest(t, '#sheetList a') || closest(t, '.sheet-list a');
+  if (sheetLink) {
+    if (e) e.preventDefault();
+    closeSheet();
+    var target = sheetLink.getAttribute('data-target') || sheetLink.getAttribute('href');
+    if (target) {
+      target = target.replace('#', '');
+      if (target === 'top') scrollToIdx(-1);
+      else {
+        var idx = -1;
+        NAV_SECTIONS.forEach(function(s, i) { if (s.id === target) idx = i; });
+        if (idx >= 0) setTimeout(function() { scrollToIdx(idx); }, 80);
+      }
+    }
+    return true;
+  }
+
+  /* --- Anchor links (smooth scroll) --- */
+  var anchor = closest(t, 'a[href^="#"]');
+  if (anchor) { handleAnchorClick(anchor, e); return true; }
+
+  return false;
+}
+
+/* ----- CLICK (mouse, and iOS synthetic click on cursor:pointer elements) ----- */
+document.addEventListener('click', function(e) {
+  /* Swallow the synthetic "ghost" click that follows a touch we already handled */
+  if (_isGhostClick()) { return; }
+  routeTap(e.target, e);
+}, false);
+
+/* ----- TOUCH (the reliable path on iOS for SVG <g> and any odd targets) -----
+   We treat a touch as a tap only if the finger barely moved (so real scrolls
+   and swipes are never hijacked). On a handled tap we run the action now and
+   suppress the lagging synthetic click to avoid double-firing. */
+var _touch = { x: 0, y: 0, t: 0, moved: false, id: null };
+document.addEventListener('touchstart', function(e) {
+  if (!e.changedTouches || !e.changedTouches.length) return;
+  var c = e.changedTouches[0];
+  _touch.x = c.clientX; _touch.y = c.clientY; _touch.t = Date.now();
+  _touch.moved = false; _touch.id = c.identifier;
+}, { passive: true });
+document.addEventListener('touchmove', function(e) {
+  if (!e.changedTouches || !e.changedTouches.length) return;
+  var c = e.changedTouches[0];
+  if (Math.abs(c.clientX - _touch.x) > 10 || Math.abs(c.clientY - _touch.y) > 10) _touch.moved = true;
+}, { passive: true });
+document.addEventListener('touchend', function(e) {
+  if (_touch.moved) return;                       /* it was a scroll/swipe */
+  if (Date.now() - _touch.t > 700) return;        /* long-press, not a tap */
+  if (!e.changedTouches || !e.changedTouches.length) return;
+  var c = e.changedTouches[0];
+  /* Resolve the element actually under the finger (e.target on touchend can
+     be stale, especially inside SVG). */
+  var t = (document.elementFromPoint && document.elementFromPoint(c.clientX, c.clientY)) || e.target;
+  if (routeTap(t, e)) {
+    _suppressGhostClick();
+    /* Prevent the 300ms zoom + ghost click without blocking scrolling
+       (we only get here for a stationary tap on a known control). */
+    if (e.cancelable) e.preventDefault();
+  }
+}, { passive: false });
+
+/* ----- KEYBOARD: Enter / Space activate focusable controls;
+   Esc closes overlays. Native <button> already fires click on Enter/Space,
+   but SVG <g role="button"> and similar need this. ----- */
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape' || e.keyCode === 27) {
+    var lb = qs('#schemaLightbox');
+    if (lb && lb.getAttribute('data-open') === 'true') { closeLightbox(); return; }
+    var sheet = qs('#sheet');
+    if (sheet && sheet.getAttribute('data-open') === 'true') { closeSheet(); return; }
+    return;
+  }
+  var isEnter = (e.key === 'Enter' || e.keyCode === 13);
+  var isSpace = (e.key === ' ' || e.key === 'Spacebar' || e.keyCode === 32);
+  if (!isEnter && !isSpace) return;
+  var t = e.target;
+  /* Let native buttons/links handle their own keyboard activation. */
+  if (t && (t.tagName === 'BUTTON' || t.tagName === 'A')) return;
+  /* Only intercept our custom role="button"/role="checkbox"/role="tab" widgets. */
+  if (!closest(t, '[role="button"],[role="checkbox"],[role="tab"],.party-node,.flow-group')) return;
+  if (routeTap(t, e)) { e.preventDefault(); }
+});
+
+/* ================================================================
+   INIT — run once on load
+   ================================================================ */
+(function init() {
+  /* Restore checklist from localStorage */
+  try {
+    var saved = JSON.parse(localStorage.getItem(CL_KEY) || '{}');
+    qsa('.cl-row').forEach(function(r) {
+      var wasChecked = saved[r.getAttribute('data-id')] === true;
+      r.setAttribute('data-checked', wasChecked ? 'true' : 'false');
+      r.setAttribute('aria-checked', wasChecked ? 'true' : 'false');
+    });
+  } catch(e) {}
+  updateChecklist();
+  updateRisk();
+  renderQuiz();
+  updateNavUI();
+
+  /* Build sheet list */
+  var sheetList = qs('#sheetList');
+  if (sheetList) {
+    sheetList.innerHTML = '';
+    var homeA = document.createElement('a'); homeA.href = '#top'; homeA.setAttribute('data-target', 'top');
+    homeA.innerHTML = '<span class="n">00</span><span>Главная</span><span class="arrow">→</span>';
+    sheetList.appendChild(homeA);
+    NAV_SECTIONS.forEach(function(s) {
+      var a = document.createElement('a'); a.href = '#' + s.id; a.setAttribute('data-target', s.id);
+      a.innerHTML = '<span class="n">' + s.num + '</span><span>' + s.title + '</span><span class="arrow">→</span>';
+      sheetList.appendChild(a);
+    });
+  }
+
+  /* Show zoom button */
+  var zb = qs('#svgZoomBtn');
+  if (zb) { zb.style.display = 'inline-flex'; zb.style.visibility = 'visible'; zb.style.opacity = '1'; }
+
+  /* Scroll-based nav updates */
+  var scrollTicking = false;
+  document.addEventListener('scroll', function() {
+    if (scrollTicking) return;
+    requestAnimationFrame(function() { updateNavUI(); scrollTicking = false; });
+    scrollTicking = true;
+  }, { passive: true });
+})();
+</script>
+
+</body>
+</html>
